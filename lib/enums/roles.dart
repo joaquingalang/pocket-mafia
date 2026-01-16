@@ -1,4 +1,4 @@
-enum Roles {
+enum Role {
   villager,
   mafia,
   detective,
