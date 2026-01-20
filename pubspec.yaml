@@ -39,6 +39,7 @@ dependencies:
   percent_indicator: ^4.2.5
   audioplayers: ^6.5.1
   google_fonts: ^7.0.2
+  flutter_svg: ^2.2.3
 
 dev_dependencies:
   flutter_test:
