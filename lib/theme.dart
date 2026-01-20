@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextColors {
-  static const primaryText = Color(0xFF637381);
-  static const secondaryText = Color(0xFF8899A8);
+  static const primaryText = Color(0xFFFFFFFF);
+  static const secondaryText = Color(0xFF8FACC7);
+  static const ternaryText = Color(0xFF0A0E21);
 }
 
 class MiscellaniousColors {
@@ -32,12 +33,12 @@ class LightModeColors {
 }
 
 class DarkModeColors {
-  static const darkPrimary = Color(0xFFF7D700);
-  static const darkOnPrimary = Color(0xFFF7D700);
-  static const darkPrimaryContainer = Color(0xFF4F3D74);
-  static const darkOnPrimaryContainer = Color(0xFFEAE0FF);
-  static const darkSecondary = Color(0xFF292929);
-  static const darkOnSecondary = Color(0xFF292929);
+  static const darkPrimary = Color(0xFF0A0E21);
+  static const darkOnPrimary = Color(0xFF1A2238);
+  static const darkPrimaryContainer = Color(0xFF0A0E21);
+  static const darkOnPrimaryContainer = Color(0xFF1A2238);
+  static const darkSecondary = Color(0xFF2A364E);
+  static const darkOnSecondary = Color(0xFFBBDEFB);
   static const darkTertiary = Color(0xFFF9FAFB);
   static const darkOnTertiary = Color(0xFFFFFFFF);
   static const darkError = Color(0xFFFFB4AB);
@@ -114,17 +115,17 @@ ThemeData get lightTheme => ThemeData(
     filled: true,
     fillColor: Colors.white,
     contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-    labelStyle: GoogleFonts.inter(
+    labelStyle: GoogleFonts.fredoka(
       fontSize: 12,
       fontWeight: FontWeight.w500,
       color: Colors.black54,
     ),
-    floatingLabelStyle: GoogleFonts.inter(
+    floatingLabelStyle: GoogleFonts.fredoka(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       color: Colors.black87,
     ),
-    hintStyle: GoogleFonts.inter(
+    hintStyle: GoogleFonts.fredoka(
       fontSize: 14,
       color: Colors.black54,
     ),
@@ -157,63 +158,63 @@ ThemeData get lightTheme => ThemeData(
     elevation: 0,
   ),
   textTheme: TextTheme(
-    displayLarge: GoogleFonts.inter(
+    displayLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.displayLarge,
       fontWeight: FontWeight.normal,
     ),
-    displayMedium: GoogleFonts.inter(
+    displayMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.displayMedium,
       fontWeight: FontWeight.normal,
     ),
-    displaySmall: GoogleFonts.inter(
+    displaySmall: GoogleFonts.fredoka(
       fontSize: FontSizes.displaySmall,
       fontWeight: FontWeight.w600,
     ),
-    headlineLarge: GoogleFonts.inter(
+    headlineLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.headlineLarge,
       fontWeight: FontWeight.normal,
     ),
-    headlineMedium: GoogleFonts.inter(
+    headlineMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.headlineMedium,
       fontWeight: FontWeight.w500,
     ),
-    headlineSmall: GoogleFonts.inter(
+    headlineSmall: GoogleFonts.fredoka(
       fontSize: FontSizes.headlineSmall,
       fontWeight: FontWeight.bold,
     ),
-    titleLarge: GoogleFonts.inter(
+    titleLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.titleLarge,
       fontWeight: FontWeight.w500,
     ),
-    titleMedium: GoogleFonts.inter(
+    titleMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.titleMedium,
       fontWeight: FontWeight.w500,
     ),
-    titleSmall: GoogleFonts.inter(
+    titleSmall: GoogleFonts.fredoka(
       fontSize: FontSizes.titleSmall,
       fontWeight: FontWeight.w500,
     ),
-    labelLarge: GoogleFonts.inter(
+    labelLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.labelLarge,
       fontWeight: FontWeight.w500,
     ),
-    labelMedium: GoogleFonts.inter(
+    labelMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.labelMedium,
       fontWeight: FontWeight.w500,
     ),
-    labelSmall: GoogleFonts.inter(
+    labelSmall: GoogleFonts.fredoka(
       fontSize: FontSizes.labelSmall,
       fontWeight: FontWeight.w500,
     ),
-    bodyLarge: GoogleFonts.inter(
+    bodyLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.bodyLarge,
       fontWeight: FontWeight.normal,
     ),
-    bodyMedium: GoogleFonts.inter(
+    bodyMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.bodyMedium,
       fontWeight: FontWeight.normal,
     ),
-    bodySmall: GoogleFonts.inter(
+    bodySmall: GoogleFonts.fredoka(
       fontSize: FontSizes.bodySmall,
       fontWeight: FontWeight.normal,
     ),
@@ -290,63 +291,63 @@ ThemeData get darkTheme => ThemeData(
     elevation: 0,
   ),
   textTheme: TextTheme(
-    displayLarge: GoogleFonts.inter(
+    displayLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.displayLarge,
       fontWeight: FontWeight.normal,
     ),
-    displayMedium: GoogleFonts.inter(
+    displayMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.displayMedium,
       fontWeight: FontWeight.normal,
     ),
-    displaySmall: GoogleFonts.inter(
+    displaySmall: GoogleFonts.fredoka(
       fontSize: FontSizes.displaySmall,
       fontWeight: FontWeight.w600,
     ),
-    headlineLarge: GoogleFonts.inter(
+    headlineLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.headlineLarge,
       fontWeight: FontWeight.normal,
     ),
-    headlineMedium: GoogleFonts.inter(
+    headlineMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.headlineMedium,
       fontWeight: FontWeight.w500,
     ),
-    headlineSmall: GoogleFonts.inter(
+    headlineSmall: GoogleFonts.fredoka(
       fontSize: FontSizes.headlineSmall,
       fontWeight: FontWeight.bold,
     ),
-    titleLarge: GoogleFonts.inter(
+    titleLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.titleLarge,
       fontWeight: FontWeight.w500,
     ),
-    titleMedium: GoogleFonts.inter(
+    titleMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.titleMedium,
       fontWeight: FontWeight.w500,
     ),
-    titleSmall: GoogleFonts.inter(
+    titleSmall: GoogleFonts.fredoka(
       fontSize: FontSizes.titleSmall,
       fontWeight: FontWeight.w500,
     ),
-    labelLarge: GoogleFonts.inter(
+    labelLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.labelLarge,
       fontWeight: FontWeight.w500,
     ),
-    labelMedium: GoogleFonts.inter(
+    labelMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.labelMedium,
       fontWeight: FontWeight.w500,
     ),
-    labelSmall: GoogleFonts.inter(
+    labelSmall: GoogleFonts.fredoka(
       fontSize: FontSizes.labelSmall,
       fontWeight: FontWeight.w500,
     ),
-    bodyLarge: GoogleFonts.inter(
+    bodyLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.bodyLarge,
       fontWeight: FontWeight.normal,
     ),
-    bodyMedium: GoogleFonts.inter(
+    bodyMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.bodyMedium,
       fontWeight: FontWeight.normal,
     ),
-    bodySmall: GoogleFonts.inter(
+    bodySmall: GoogleFonts.fredoka(
       fontSize: FontSizes.bodySmall,
       fontWeight: FontWeight.normal,
     ),
