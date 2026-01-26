@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class TextColors {
   static const primaryText = Color(0xFFFFFFFF);
   static const secondaryText = Color(0xFF8FACC7);
-  static const ternaryText = Color(0xFF0A0E21);
+  static const buttonText = Color(0xFF0A0E21);
 }
 
 class MiscellaniousColors {
@@ -290,6 +290,7 @@ ThemeData get darkTheme => ThemeData(
     foregroundColor: DarkModeColors.darkOnPrimaryContainer,
     elevation: 0,
   ),
+  scaffoldBackgroundColor: DarkModeColors.darkPrimary,
   textTheme: TextTheme(
     displayLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.displayLarge,
@@ -329,15 +330,15 @@ ThemeData get darkTheme => ThemeData(
     ),
     labelLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.labelLarge,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
     ),
     labelMedium: GoogleFonts.fredoka(
       fontSize: FontSizes.labelMedium,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
     ),
     labelSmall: GoogleFonts.fredoka(
       fontSize: FontSizes.labelSmall,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
     ),
     bodyLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.bodyLarge,
