@@ -49,7 +49,7 @@ class DarkModeColors {
   static const darkShadow = Color(0xFF000000);
   static const darkSurface = Color(0xFF121212);
   static const darkOnSurface = Color(0xFFE0E0E0);
-  static const darkAppBarBackground = Color(0xFF4F3D74);
+  static const darkAppBarBackground = Colors.transparent;
 }
 
 class FontSizes {
@@ -337,8 +337,9 @@ ThemeData get darkTheme => ThemeData(
       fontWeight: FontWeight.w600,
     ),
     labelSmall: GoogleFonts.fredoka(
+      color: TextColors.secondaryText,
       fontSize: FontSizes.labelSmall,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.bold,
     ),
     bodyLarge: GoogleFonts.fredoka(
       fontSize: FontSizes.bodyLarge,
