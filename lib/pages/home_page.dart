@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/components/pill_button.dart';
+import 'package:pocket_mafia/pages/settings_page.dart';
+import 'package:pocket_mafia/pages/tutorial_page.dart';
 import 'package:pocket_mafia/theme.dart';
 import 'package:sizer/sizer.dart';
 
@@ -14,7 +16,6 @@ class HomePage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-
               // Offset
               const SizedBox(height: 24),
 
@@ -28,9 +29,21 @@ class HomePage extends StatelessWidget {
 
               const SizedBox(height: 64),
 
-              RoundedRectangleButton(label: 'PLAY', onPressed: () {}),
-              RoundedRectangleButton(label: 'HOW TO PLAY', onPressed: () {}),
-              RoundedRectangleButton(label: 'SETTINGS', onPressed: () {}),
+              PillButton(label: 'PLAY', onPressed: () {}),
+              PillButton(
+                label: 'HOW TO PLAY',
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TutorialPage()),
+                ),
+              ),
+              PillButton(
+                label: 'SETTINGS',
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsPage()),
+                ),
+              ),
             ],
           ),
         ),
