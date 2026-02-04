@@ -42,6 +42,7 @@ dependencies:
   flutter_svg: ^2.2.3
   shared_preferences: ^2.5.4
   particles_flutter: ^2.0.2
+  smooth_page_indicator: ^2.0.1
 
 dev_dependencies:
   flutter_test:
