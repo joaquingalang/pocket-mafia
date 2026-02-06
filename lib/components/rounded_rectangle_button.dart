@@ -35,47 +35,44 @@ class _RoundedRectangleButtonState extends State<RoundedRectangleButton> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: AnimatedOpacity(
-        opacity: _isPressed ? 0.5 : 1.0,
-        duration: const Duration(milliseconds: 100),
-        child: GestureDetector(
-          onTapDown: (details) => _handlePress(true),
-          onTapUp: (details) => _handlePress(false),
-          child: Container(
-            width: double.infinity,
-            height: 50,
-            padding: EdgeInsets.symmetric(vertical: 15),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.onSecondary,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                if (!_isPressed) BoxShadow(
-                  offset: Offset(0, 2),
-                  blurRadius: 10,
-                  color: theme.colorScheme.onSecondary.withOpacity(0.5),
-                )
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 5,
-              children: [
-                Text(
-                  widget.label,
-                  style: theme.textTheme.labelLarge!.copyWith(
-                    color: TextColors.buttonText,
-                  ),
+    return AnimatedOpacity(
+      opacity: _isPressed ? 0.5 : 1.0,
+      duration: const Duration(milliseconds: 100),
+      child: GestureDetector(
+        onTapDown: (details) => _handlePress(true),
+        onTapUp: (details) => _handlePress(false),
+        child: Container(
+          width: double.infinity,
+          height: 50,
+          padding: EdgeInsets.symmetric(vertical: 15),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.onSecondary,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              if (!_isPressed) BoxShadow(
+                offset: Offset(0, 2),
+                blurRadius: 10,
+                color: theme.colorScheme.onSecondary.withOpacity(0.5),
+              )
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 5,
+            children: [
+              Text(
+                widget.label,
+                style: theme.textTheme.labelLarge!.copyWith(
+                  color: TextColors.buttonText,
                 ),
-                if (widget.iconData != null) Icon(
-                  widget.iconData,
-                  color: theme.colorScheme.primary,
-                  size: 24,
-                )
-              ],
-            ),
+              ),
+              if (widget.iconData != null) Icon(
+                widget.iconData,
+                color: theme.colorScheme.primary,
+                size: 24,
+              )
+            ],
           ),
         ),
       ),
