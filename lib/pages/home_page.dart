@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_mafia/components/pill_button.dart';
+import 'package:pocket_mafia/pages/game_setup_page.dart';
 import 'package:pocket_mafia/pages/settings_page.dart';
 import 'package:pocket_mafia/pages/tutorial_page.dart';
 import 'package:pocket_mafia/theme.dart';
@@ -29,7 +30,13 @@ class HomePage extends StatelessWidget {
 
               const SizedBox(height: 64),
 
-              PillButton(label: 'PLAY', onPressed: () {}),
+              PillButton(
+                label: 'PLAY',
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GameSetupPage()),
+                ),
+              ),
               PillButton(
                 label: 'HOW TO PLAY',
                 onPressed: () => Navigator.push(
