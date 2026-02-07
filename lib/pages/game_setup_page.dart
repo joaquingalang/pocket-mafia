@@ -16,17 +16,17 @@ class _GameSetupPageState extends State<GameSetupPage> {
   double _dayDuration = 300;
   final double _dayMin = 30;
   final double _dayMax = 600;
-  final int _dayDivisions = 20;
+  final int _dayDivisions = 19;
 
   double _nightDuration = 60;
   final double _nightMin = 15;
   final double _nightMax = 180;
-  final int _nightDivisions = 12;
+  final int _nightDivisions = 11;
 
   double _voteDuration = 30;
   final double _voteMin = 10;
   final double _voteMax = 60;
-  final int _voteDivision = 6;
+  final int _voteDivision = 5;
 
   @override
   Widget build(BuildContext context) {
