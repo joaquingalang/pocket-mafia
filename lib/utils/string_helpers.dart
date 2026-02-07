@@ -33,4 +33,17 @@ extension StringHelpers on String {
     return hasLetters;
   }
 
+  String toTitleCase() {
+    if (this.isEmpty) {
+      return this;
+    }
+    // Split the string into words, capitalize the first letter of each, and rejoin
+    return this.split(' ').map((word) {
+      if (word.isEmpty) {
+        return word;
+      }
+      return word[0].toUpperCase() + word.substring(1).toLowerCase();
+    }).join(' ');
+  }
+
 }
