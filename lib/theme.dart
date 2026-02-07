@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class TextColors {
   static const primaryText = Color(0xFFFFFFFF);
   static const secondaryText = Color(0xFF8FACC7);
+  static const tertiaryText = Color(0x80FFFFFF );
   static const buttonText = Color(0xFF0A0E21);
 }
 
