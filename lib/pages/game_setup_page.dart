@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
+import 'package:pocket_mafia/pages/add_players_page.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class GameSetupPage extends StatefulWidget {
@@ -98,7 +99,10 @@ class _GameSetupPageState extends State<GameSetupPage> {
               RoundedRectangleButton(
                 label: 'ADD PLAYERS',
                 iconData: Icons.arrow_forward,
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddPlayersPage()),
+                ),
               ),
 
               // Offset
@@ -232,7 +236,7 @@ class _PhaseDurationSliderState extends State<PhaseDurationSlider> {
                 style: theme.textTheme.labelMedium,
               ),
             ],
-          )
+          ),
         ],
       ),
     );
