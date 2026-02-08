@@ -3,21 +3,79 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
 import 'package:pocket_mafia/enums/roles.dart';
+import 'package:pocket_mafia/models/game.dart';
+import 'package:pocket_mafia/models/player.dart';
+import 'package:pocket_mafia/models/role.dart';
 import 'package:pocket_mafia/pages/game_summary_page.dart';
 import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 
 class RoleSelectPage extends StatefulWidget {
-  const RoleSelectPage({super.key});
+  const RoleSelectPage({super.key, required this.game, required this.names});
+
+  final Game game;
+  final List<String> names;
 
   @override
   State<RoleSelectPage> createState() => _RoleSelectPageState();
 }
 
 class _RoleSelectPageState extends State<RoleSelectPage> {
+  List<Roles> roles = [];
+
+  int _getRoleCount(Roles search) {
+    int count = 0;
+    for (Roles role in roles) {
+      if (role == search) {
+        count += 1;
+      }
+    }
+    return count;
+  }
+
+  void _addRole(Roles newRole) {
+    roles.add(newRole);
+    setState(() {});
+    print(roles);
+  }
+
+  void _removeRole(Roles deleted) {
+    print(deleted);
+    for (int i = 0; i < roles.length; i++) {
+      if (roles[i] == deleted) {
+        roles.removeAt(i);
+        setState(() {});
+      }
+    }
+    print(roles);
+  }
+
+  void _submitRoles() {
+    if (roles.length > widget.names.length) {
+      roles = roles.sublist(widget.names.length);
+    }
+    if (roles.length < widget.names.length) {
+      for (int i = 0; i < widget.names.length - roles.length; i++) {
+        roles.add(Roles.villager);
+      }
+    }
+    roles.shuffle();
+    List<Player> players = [];
+    for (int i = 0; i < roles.length; i++) {
+      final name = widget.names[i];
+      final role = Role.initFields(roles[i]);
+      final Player player = Player(name: name, role: role);
+      players.add(player);
+    }
+    final game = widget.game.copyWith(players: players);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => GameSummaryPage(game: game)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -29,7 +87,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
               // Offset
               SizedBox(height: 35),
 
-              TotalPlayerTile(count: 8),
+              TotalPlayerTile(count: widget.names.length),
 
               // Offset
               SizedBox(height: 20),
@@ -42,10 +100,15 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
                   ),
-                  itemCount: Roles.values.length,
+                  itemCount: Roles.values.length - 1,
                   itemBuilder: (context, index) {
-                    final role = Roles.values[index];
-                    return RoleCard(role: role);
+                    final role = Role.initFields(Roles.values[index + 1]);
+                    return RoleCard(
+                      role: role,
+                      count: _getRoleCount(role.type),
+                      onAdd: () => _addRole(role.type),
+                      onRemove: () => _removeRole(role.type),
+                    );
                   },
                 ),
               ),
@@ -56,10 +119,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
               RoundedRectangleButton(
                 label: 'REVIEW SETTINGS',
                 iconData: Icons.arrow_forward,
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GameSummaryPage()),
-                ),
+                onPressed: _submitRoles,
               ),
 
               // Offset
@@ -73,17 +133,24 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
 }
 
 class RoleCard extends StatefulWidget {
-  const RoleCard({super.key, required this.role});
+  const RoleCard({
+    super.key,
+    required this.role,
+    required this.count,
+    required this.onAdd,
+    required this.onRemove,
+  });
 
-  final Roles role;
+  final Role role;
+  final int count;
+  final VoidCallback onAdd;
+  final VoidCallback onRemove;
 
   @override
   State<RoleCard> createState() => _RoleCardState();
 }
 
 class _RoleCardState extends State<RoleCard> {
-  int _roleCount = 0;
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -121,13 +188,13 @@ class _RoleCardState extends State<RoleCard> {
           // Offset
           SizedBox(height: 8),
           Text(
-            widget.role.name.toTitleCase(),
+            widget.role.name!.toTitleCase(),
             style: theme.textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            (widget.role == Roles.mafia) ? 'KILLER TEAM' : 'VILLAGER TEAM',
+            (widget.role.type == Roles.mafia) ? 'KILLER TEAM' : 'VILLAGER TEAM',
             style: theme.textTheme.labelSmall,
           ),
 
@@ -144,18 +211,15 @@ class _RoleCardState extends State<RoleCard> {
               children: [
                 RoleIncrementButton(
                   iconData: Icons.remove,
-                  onPressed: () => setState(() {
-                    if (_roleCount > 0) {
-                      _roleCount -= 1;
-                    }
-                  }),
+                  onPressed: widget.onRemove,
                 ),
-                Text(_roleCount.toString(), style: theme.textTheme.labelLarge),
+                Text(
+                  widget.count.toString(),
+                  style: theme.textTheme.labelLarge,
+                ),
                 RoleIncrementButton(
                   iconData: Icons.add,
-                  onPressed: () => setState(() {
-                    _roleCount += 1;
-                  }),
+                  onPressed: widget.onAdd,
                 ),
               ],
             ),
