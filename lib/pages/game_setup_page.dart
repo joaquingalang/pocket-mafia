@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
+import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/pages/add_players_page.dart';
 import 'package:pocket_mafia/theme.dart';
 
@@ -28,6 +29,16 @@ class _GameSetupPageState extends State<GameSetupPage> {
   final double _voteMin = 10;
   final double _voteMax = 60;
   final int _voteDivision = 5;
+
+  void _submitDurations() {
+    final Game game = Game(
+      dayDuration: Duration(seconds: _dayDuration.toInt()),
+      nightDuration: Duration(seconds: _nightDuration.toInt()),
+      voteDuration: Duration(seconds: _voteDuration.toInt()),
+
+    );
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AddPlayersPage(game: game)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,10 +110,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
               RoundedRectangleButton(
                 label: 'ADD PLAYERS',
                 iconData: Icons.arrow_forward,
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddPlayersPage()),
-                ),
+                onPressed: _submitDurations,
               ),
 
               // Offset
