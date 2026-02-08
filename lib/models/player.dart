@@ -6,7 +6,7 @@ class Player {
   Player({required this.name, required this.role});
 
   final String name;
-  final Role role;
+  final Roles role;
 
   String get roleName {
     String roleName = '';

@@ -42,9 +42,9 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
                   ),
-                  itemCount: Role.values.length,
+                  itemCount: Roles.values.length,
                   itemBuilder: (context, index) {
-                    final role = Role.values[index];
+                    final role = Roles.values[index];
                     return RoleCard(role: role);
                   },
                 ),
@@ -75,7 +75,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
 class RoleCard extends StatefulWidget {
   const RoleCard({super.key, required this.role});
 
-  final Role role;
+  final Roles role;
 
   @override
   State<RoleCard> createState() => _RoleCardState();
@@ -127,7 +127,7 @@ class _RoleCardState extends State<RoleCard> {
             ),
           ),
           Text(
-            (widget.role == Role.mafia) ? 'KILLER TEAM' : 'VILLAGER TEAM',
+            (widget.role == Roles.mafia) ? 'KILLER TEAM' : 'VILLAGER TEAM',
             style: theme.textTheme.labelSmall,
           ),
 

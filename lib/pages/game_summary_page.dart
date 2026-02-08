@@ -82,15 +82,15 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
                 SizedBox(height: 15),
             
                 _RoleTile(
-                  role: Role.mafia,
+                  role: Roles.mafia,
                   count: 2,
                 ),
                 _RoleTile(
-                  role: Role.detective,
+                  role: Roles.detective,
                   count: 1,
                 ),
                 _RoleTile(
-                  role: Role.doctor,
+                  role: Roles.doctor,
                   count: 1,
                 ),
             
@@ -124,7 +124,7 @@ class _RoleTile extends StatelessWidget {
     required this.count,
   });
 
-  final Role role;
+  final Roles role;
   final int count;
 
   @override
@@ -160,7 +160,7 @@ class _RoleTile extends StatelessWidget {
                 ),
               ),
               Text(
-                (role == Role.mafia) ? 'KILLER TEAM' : 'VILLAGER TEAM',
+                (role == Roles.mafia) ? 'KILLER TEAM' : 'VILLAGER TEAM',
                 style: theme.textTheme.labelSmall!.copyWith(
                   color: const Color(0xFFF43F5E),
                 ),
