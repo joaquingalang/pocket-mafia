@@ -3,7 +3,7 @@ import 'package:pocket_mafia/utils/string_helpers.dart';
 
 class Role {
 
-  final Roles role;
+  final Roles type;
   final String? name;
   final Teams? team;
   final String? ability;
@@ -11,7 +11,7 @@ class Role {
   final int? count;
 
   const Role({
-    required this.role,
+    required this.type,
     this.name,
     this.team,
     this.ability,
@@ -25,12 +25,22 @@ class Role {
     final ability = roleAbility[role];
     final winCondition = roleWinCondition[role];
     return Role(
-      role: role,
+      type: role,
       name: name,
       team: team,
       ability: ability,
       winCondition: winCondition,
       count: 0
+    );
+  }
+
+  Role copyWith({Roles? role, String? name, Teams? team, String? ability, int? count}) {
+    return Role(
+      type: role ?? this.type,
+      name: name ?? this.name,
+      team: team ?? this.team,
+      ability: ability ?? this.ability,
+      count: count ?? this.count,
     );
   }
 
