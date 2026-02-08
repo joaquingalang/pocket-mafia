@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/models/game.dart';
+import 'package:pocket_mafia/pages/role_select_page.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class AddPlayersPage extends StatefulWidget {
-  const AddPlayersPage({super.key});
+  const AddPlayersPage({super.key, required this.game});
+
+  final Game game;
 
   @override
   State<AddPlayersPage> createState() => _AddPlayersPageState();
@@ -12,7 +16,23 @@ class AddPlayersPage extends StatefulWidget {
 
 class _AddPlayersPageState extends State<AddPlayersPage> {
   final TextEditingController _nameController = TextEditingController();
-  List<String> players = [];
+  List<String> names = ['Anton', 'Lily', 'Joaquin', 'Mama', 'Papa'];
+
+  void _submitPlayers() {
+    if (names.length < 5) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Game requires at least 5 players.')),
+      );
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RoleSelectPage(game: widget.game, names: names),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +52,7 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
                 nameController: _nameController,
                 onAdd: (name) {
                   setState(() {
-                    players.insert(0, name);
+                    names.insert(0, name);
                   });
                 },
               ),
@@ -43,13 +63,13 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
               // Players
               Expanded(
                 child: ListView.builder(
-                  itemCount: players.length,
+                  itemCount: names.length,
                   itemBuilder: (context, index) {
                     return PlayerListTile(
-                      name: players[index],
+                      name: names[index],
                       onClose: () {
                         setState(() {
-                          players.removeAt(index);
+                          names.removeAt(index);
                         });
                       },
                     );
@@ -60,7 +80,7 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
               RoundedRectangleButton(
                 label: 'PICK ROLES',
                 iconData: Icons.arrow_forward,
-                onPressed: () {},
+                onPressed: _submitPlayers,
               ),
 
               // Offset
