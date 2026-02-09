@@ -27,4 +27,5 @@ class Game {
       players: players ?? this.players,
     );
   }
+
 }
