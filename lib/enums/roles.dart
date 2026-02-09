@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:pocket_mafia/theme.dart';
+
 enum Roles {
-  villager,
   mafia,
   detective,
   doctor,
@@ -13,6 +15,7 @@ enum Roles {
   preacher,
   medium,
   saboteur,
+  villager,
 }
 
 enum Teams {
@@ -50,4 +53,21 @@ final Map<Roles, String> roleWinCondition = {
   Roles.celebrity: 'The Village wins when all Mafia are eliminated.',
   Roles.preacher: 'The Village wins when all Mafia are eliminated.',
   Roles.medium: 'The Village wins when all Mafia are eliminated.',
+};
+
+final Map<Roles, Color> roleColor = {
+  Roles.villager: MiscellaniousColors.gray,
+  Roles.mafia: MiscellaniousColors.red,
+  Roles.detective: MiscellaniousColors.blue,
+  Roles.doctor: MiscellaniousColors.green,
+  Roles.jester: Colors.pink,
+  Roles.headhunter: Colors.orange,
+  Roles.vigilante: Colors.indigo,
+  Roles.mortician: Colors.blueGrey,
+  Roles.lover: Colors.pinkAccent,
+  Roles.snitch: Colors.yellow,
+  Roles.celebrity: Colors.deepPurpleAccent,
+  Roles.preacher: Colors.brown,
+  Roles.medium: Colors.tealAccent,
+  Roles.saboteur: Colors.black54,
 };
