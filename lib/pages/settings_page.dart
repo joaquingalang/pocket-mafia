@@ -24,7 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MainAppBar(label: 'Game Settings'),
+              MainAppBar(title: 'Game Settings'),
 
               // Offset
               SizedBox(height: 35),

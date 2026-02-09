@@ -50,7 +50,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MainAppBar(label: 'Game Setup'),
+              MainAppBar(title: 'Game Setup'),
 
               // Offset
               SizedBox(height: 35),

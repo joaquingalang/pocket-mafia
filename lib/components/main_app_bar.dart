@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class MainAppBar extends StatelessWidget {
   const MainAppBar({
     super.key,
-    required this.label,
+    required this.title,
   });
 
-  final String label;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,9 @@ class MainAppBar extends StatelessWidget {
               ),
             ),
           ),
-          Text(label, style: theme.textTheme.headlineSmall),
+
+
+          Text(title, style: theme.textTheme.headlineSmall),
 
           // Offset
           SizedBox(width: 36),

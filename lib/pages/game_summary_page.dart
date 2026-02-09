@@ -75,7 +75,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MainAppBar(label: 'Game Summary'),
+                MainAppBar(title: 'Game Summary'),
 
                 // Offset
                 SizedBox(height: 35),

@@ -42,7 +42,7 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
           padding: const EdgeInsetsGeometry.symmetric(horizontal: 30),
           child: Column(
             children: [
-              MainAppBar(label: 'Add Players'),
+              MainAppBar(title: 'Add Players'),
 
               // Offset
               SizedBox(height: 35),

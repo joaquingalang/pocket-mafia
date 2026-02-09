@@ -111,7 +111,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             children: [
-              MainAppBar(label: 'Select Roles'),
+              MainAppBar(title: 'Select Roles'),
 
               // Offset
               SizedBox(height: 35),
