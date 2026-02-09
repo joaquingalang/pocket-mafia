@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
+import 'package:pocket_mafia/components/player_tile.dart';
 import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/models/player.dart';
+import 'package:pocket_mafia/pages/day_page.dart';
 import 'package:pocket_mafia/pages/game_summary_page.dart';
 import 'package:pocket_mafia/pages/role_reveal_page.dart';
 import 'package:pocket_mafia/theme.dart';
@@ -27,7 +29,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
     final int visible = (playerCount <= 5) ? playerCount : 5;
     for (int i = 0; i < visible; i++) {
       final player = widget.game.players![i];
-      playerTiles.add(_PlayerTile(name: player.name, id: i + 1));
+      playerTiles.add(PlayerTile(name: player.name, id: i + 1));
     }
     if (playerCount - visible > 0) {
       playerTiles.add(_MorePlayersTile(count: playerCount - visible));
@@ -227,39 +229,6 @@ class _RoleTile extends StatelessWidget {
                   color: roleColor[role],
                 ),
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PlayerTile extends StatelessWidget {
-  const _PlayerTile({super.key, required this.name, required this.id});
-
-  final String name;
-  final int id;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      padding: EdgeInsets.all(15),
-      margin: EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.secondary,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(name, style: theme.textTheme.labelLarge),
-          Text(
-            '#$id',
-            style: theme.textTheme.labelLarge!.copyWith(
-              color: const Color(0xFF4E5F79),
-              fontWeight: FontWeight.bold,
             ),
           ),
         ],
