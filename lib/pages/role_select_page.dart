@@ -51,20 +51,25 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
   }
 
   void _submitRoles() {
+    print('Roles Before: ${roles}');
     if (roles.length > widget.names.length) {
       roles = roles.sublist(widget.names.length);
     }
+    print(widget.names.length - roles.length);
     if (roles.length < widget.names.length) {
-      for (int i = 0; i < widget.names.length - roles.length; i++) {
+      final roleCount = roles.length;
+      for (int i = 0; i < widget.names.length - roleCount; i++) {
         roles.add(Roles.villager);
       }
     }
+    print('Roles After: ${roles}');
     roles.shuffle();
     List<Player> players = [];
     for (int i = 0; i < roles.length; i++) {
       final name = widget.names[i];
       final role = Role.initFields(roles[i]);
       final Player player = Player(name: name, role: role);
+      print('${player.name} : ${player.role.type}');
       players.add(player);
     }
     final game = widget.game.copyWith(players: players);
@@ -72,6 +77,30 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
       context,
       MaterialPageRoute(builder: (context) => GameSummaryPage(game: game)),
     );
+  }
+
+  int _getMafiaCount(int totalPlayers) {
+    return ((totalPlayers + 1) / 4)
+        .floor()
+        .clamp(1, totalPlayers - 1);
+  }
+
+  void _initRoles() {
+    final mafiaCount = _getMafiaCount(widget.names!.length);
+    for (int i = 0; i < mafiaCount; i++) {
+      setState(() {
+        roles.add(Roles.mafia);
+      });
+    }
+    setState(() {
+      roles.addAll([Roles.detective, Roles.doctor]);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initRoles();
   }
 
   @override
@@ -96,13 +125,13 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 11 / 12,
+                    childAspectRatio: 11 / 13,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
                   ),
                   itemCount: Roles.values.length - 1,
                   itemBuilder: (context, index) {
-                    final role = Role.initFields(Roles.values[index + 1]);
+                    final role = Role.initFields(Roles.values[index]);
                     return RoleCard(
                       role: role,
                       count: _getRoleCount(role.type),
@@ -171,7 +200,7 @@ class _RoleCardState extends State<RoleCard> {
                 width: 46,
                 height: 46,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF43F5E),
+                  color: roleColor[widget.role.type],
                   borderRadius: BorderRadius.circular(1000),
                 ),
               ),
