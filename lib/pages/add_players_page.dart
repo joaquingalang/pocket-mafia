@@ -16,7 +16,7 @@ class AddPlayersPage extends StatefulWidget {
 
 class _AddPlayersPageState extends State<AddPlayersPage> {
   final TextEditingController _nameController = TextEditingController();
-  List<String> names = ['Anton', 'Lily', 'Joaquin', 'Mama', 'Papa'];
+  List<String> names = ['Anton', 'Lily', 'Joaquin', 'Angela', 'Jade', 'Jason'];
 
   void _submitPlayers() {
     if (names.length < 5) {
@@ -65,7 +65,7 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
                 child: ListView.builder(
                   itemCount: names.length,
                   itemBuilder: (context, index) {
-                    return PlayerListTile(
+                    return _PlayerListTile(
                       name: names[index],
                       onClose: () {
                         setState(() {
@@ -173,8 +173,8 @@ class _AddPlayerTextFieldState extends State<AddPlayerTextField> {
   }
 }
 
-class PlayerListTile extends StatelessWidget {
-  const PlayerListTile({super.key, required this.name, required this.onClose});
+class _PlayerListTile extends StatelessWidget {
+  const _PlayerListTile({super.key, required this.name, required this.onClose});
 
   final String name;
   final VoidCallback onClose;
