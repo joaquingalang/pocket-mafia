@@ -11,6 +11,10 @@ class TextColors {
 class MiscellaniousColors {
   static const borderColor = Color(0xFFD7DCE2);
   static const info = Color(0xFF0B75B7);
+  static const red = Color(0xFFF43F5E);
+  static const green = Color(0xFF10B981);
+  static const blue = Color(0xFF06B6D4);
+  static const gray = Color(0xFF94A3B8);
 }
 
 class LightModeColors {
