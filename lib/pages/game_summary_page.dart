@@ -10,6 +10,7 @@ import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/pages/day_page.dart';
 import 'package:pocket_mafia/pages/game_summary_page.dart';
 import 'package:pocket_mafia/pages/role_reveal_page.dart';
+import 'package:pocket_mafia/pages/vote_page.dart';
 import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 
@@ -60,9 +61,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
   void _startGame() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => RoleRevealPage(game: widget.game),
-      ),
+      MaterialPageRoute(builder: (context) => VotePage(game: widget.game)),
     );
   }
 
