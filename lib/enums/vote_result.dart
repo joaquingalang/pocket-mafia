@@ -18,10 +18,10 @@ enum VoteResult {
     }
   }
 
-  String getTitle(Player player) {
+  String getTitle(Player? player) {
     switch (this) {
       case VoteResult.executed:
-        return player.name.toUpperCase();
+        return player!.name.toUpperCase();
       case VoteResult.spared:
         return 'Everyone Is Spared';
       case VoteResult.divided:
@@ -29,16 +29,16 @@ enum VoteResult {
     }
   }
 
-  String getSubtitle(Player player) {
+  String getSubtitle(Player? player) {
     if (this == VoteResult.executed) {
-      return player.role.name!.toUpperCase();
+      return player!.role.name!.toUpperCase();
     }
     return 'NO BLOOD SPILLED';
   }
 
-  String getPhrase(Player player) {
+  String getPhrase(Player? player) {
     final random = Random();
-    final name = player.name;
+    final name = (player == null) ? 'NO NAME' : player.name;
     switch (this) {
       case VoteResult.executed:
         final executedPhrases = [
