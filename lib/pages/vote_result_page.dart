@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
 import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/enums/vote_result.dart';
+import 'package:pocket_mafia/models/player.dart';
 import 'package:sizer/sizer.dart';
 
 class VoteResultPage extends StatelessWidget {
-  const VoteResultPage({super.key});
+  const VoteResultPage({super.key, required this.result, this.player});
+
+  final VoteResult result;
+  final Player? player;
 
   @override
   Widget build(BuildContext context) {
@@ -29,72 +34,72 @@ class VoteResultPage extends StatelessWidget {
 
               Spacer(),
 
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(40),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(1000),
-                    ),
-                    child: SvgPicture.asset(
-                      'assets/images/icons/dead_icon.svg',
-                    ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(40),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(1000),
                   ),
-
-                  // Offset
-                  SizedBox(height: 30),
-
-                  Text('ALEX CARTER', style: theme.textTheme.displaySmall),
-
-                  // Offset
-                  SizedBox(height: 10),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 6,
-                    children: [
-                      Container(
-                        height: 1,
-                        width: 46,
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                      ),
-
-                      Text(
-                        'VILLAGER',
-                        style: theme.textTheme.labelSmall!.copyWith(
-                          color: theme.colorScheme.onSecondary,
-                        ),
-                      ),
-
-                      Container(
-                        height: 1,
-                        width: 46,
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                      ),
-                    ],
+                  child: SvgPicture.asset(
+                    result.getIconPath(),
                   ),
+                ),
 
-                  // Offset
-                  SizedBox(height: 20),
+                // Offset
+                SizedBox(height: 30),
 
-                  SizedBox(
-                    width: 60.w,
-                    child: Text(
-                      'The decision is made. Alex Carter will not see another day.',
-                      style: theme.textTheme.bodyMedium,
-                      textAlign: TextAlign.center,
+                Text(result.getTitle(player!), style: theme.textTheme.displaySmall),
+
+                // Offset
+                SizedBox(height: 10),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 10,
+                  children: [
+                    Container(
+                      height: 1,
+                      width: 46,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.secondary,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
                     ),
+
+                    Text(
+                      result.getSubtitle(player!),
+                      style: theme.textTheme.labelSmall!.copyWith(
+                        color: theme.colorScheme.onSecondary,
+                      ),
+                    ),
+
+                    Container(
+                      height: 1,
+                      width: 46,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.secondary,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // Offset
+                SizedBox(height: 20),
+
+                SizedBox(
+                  width: 60.w,
+                  child: Text(
+                    result.getPhrase(player!),
+                    style: theme.textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
 
               Spacer(),
 
