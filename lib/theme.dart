@@ -15,6 +15,7 @@ class MiscellaniousColors {
   static const green = Color(0xFF10B981);
   static const blue = Color(0xFF06B6D4);
   static const gray = Color(0xFF94A3B8);
+  static const secondaryButtonColor = Color(0xFF4E5F79);
 }
 
 class LightModeColors {
