@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_mafia/theme.dart';
 
-class RoundedRectangleButton extends StatefulWidget {
-  const RoundedRectangleButton({
+class PrimaryButton extends StatefulWidget {
+  const PrimaryButton({
     super.key,
     required this.label,
     this.iconData,
@@ -16,10 +16,10 @@ class RoundedRectangleButton extends StatefulWidget {
   final bool isDisabled;
 
   @override
-  State<RoundedRectangleButton> createState() => _RoundedRectangleButtonState();
+  State<PrimaryButton> createState() => _PrimaryButtonState();
 }
 
-class _RoundedRectangleButtonState extends State<RoundedRectangleButton> {
+class _PrimaryButtonState extends State<PrimaryButton> {
 
   bool _isPressed = false;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
-import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/pages/add_players_page.dart';
@@ -107,7 +107,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
 
               Spacer(),
 
-              RoundedRectangleButton(
+              PrimaryButton(
                 label: 'ADD PLAYERS',
                 iconData: Icons.arrow_forward,
                 onPressed: _submitDurations,

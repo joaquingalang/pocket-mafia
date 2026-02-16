@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
-import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/vote_result.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:sizer/sizer.dart';
@@ -118,7 +118,7 @@ class _VoteResultPageState extends State<VoteResultPage> {
               // Offset
               SizedBox(height: 15),
 
-              RoundedRectangleButton(
+              PrimaryButton(
                 label: 'PROCEED TO NIGHT',
                 iconData: Icons.nightlight_outlined,
                 onPressed: () {},

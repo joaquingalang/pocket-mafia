@@ -127,7 +127,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
                 // Offset
                 SizedBox(height: 35),
 
-                RoundedRectangleButton(
+                PrimaryButton(
                   label: 'START GAME',
                   iconData: Icons.play_arrow_outlined,
                   onPressed: _startGame,

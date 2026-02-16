@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/models/player.dart';
@@ -79,7 +79,7 @@ class _RoleRevealPageState extends State<RoleRevealPage> {
 
               Spacer(),
 
-              RoundedRectangleButton(
+              PrimaryButton(
                 label: !_isLastPlayer() ? 'I UNDERSTAND' : 'BEGIN DISCUSSION',
                 iconData: Icons.arrow_forward,
                 onPressed: !_isHidden ? _nextPlayer : () {},

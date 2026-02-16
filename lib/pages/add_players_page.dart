@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
-import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/pages/role_select_page.dart';
 import 'package:pocket_mafia/theme.dart';
@@ -77,7 +77,7 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
                 ),
               ),
 
-              RoundedRectangleButton(
+              PrimaryButton(
                 label: 'PICK ROLES',
                 iconData: Icons.arrow_forward,
                 onPressed: _submitPlayers,

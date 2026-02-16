@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/models/tutorial.dart';
 import 'package:pocket_mafia/pages/home_page.dart';
 import 'package:pocket_mafia/theme.dart';
@@ -104,7 +104,7 @@ class _TutorialPageState extends State<TutorialPage> {
                   activeDotColor: theme.colorScheme.onSecondary,
                 ),
               ),
-              RoundedRectangleButton(
+              PrimaryButton(
                 label: !_isLastPage ? 'NEXT' : 'DONE',
                 iconData: !_isLastPage ? Icons.arrow_forward : Icons.check,
                 onPressed: () {
