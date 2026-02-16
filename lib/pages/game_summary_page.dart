@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
-import 'package:pocket_mafia/components/rounded_rectangle_button.dart';
+import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/enums/roles.dart';
+import 'package:pocket_mafia/enums/vote_result.dart';
 import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/pages/day_page.dart';
+import 'package:pocket_mafia/pages/game_result_page.dart';
 import 'package:pocket_mafia/pages/game_summary_page.dart';
 import 'package:pocket_mafia/pages/role_reveal_page.dart';
 import 'package:pocket_mafia/pages/vote_page.dart';
+import 'package:pocket_mafia/pages/vote_result_page.dart';
 import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 
@@ -24,6 +27,9 @@ class GameSummaryPage extends StatefulWidget {
 }
 
 class _GameSummaryPageState extends State<GameSummaryPage> {
+
+  final ScrollController _scrollController = ScrollController();
+
   Widget _buildPlayerTiles() {
     List<Widget> playerTiles = [];
     final int playerCount = widget.game.players!.length;
@@ -58,11 +64,31 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
     return Column(children: roleTiles);
   }
 
+  Future<void> _scrollAfterDelay() async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 1000), curve: Curves.easeInOut);
+    }
+  }
+
   void _startGame() {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => VotePage(game: widget.game)),
+    // );
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => VotePage(game: widget.game)),
+      MaterialPageRoute(
+        builder: (context) => GameResultPage(game: widget.game),
+      ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollAfterDelay();
   }
 
   @override
@@ -73,6 +99,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
