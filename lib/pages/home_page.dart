@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
               // Offset
               const SizedBox(height: 56),
 
-              Image.asset('assets/images/placeholder.png', width: 250),
+              Image.asset('assets/images/logo.png', width: 50.w),
 
               const SizedBox(height: 64),
 
