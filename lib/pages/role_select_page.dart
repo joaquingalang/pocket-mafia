@@ -45,6 +45,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
       if (roles[i] == deleted) {
         roles.removeAt(i);
         setState(() {});
+        break;
       }
     }
     print(roles);
