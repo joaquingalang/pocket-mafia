@@ -104,20 +104,23 @@ class _TutorialPageState extends State<TutorialPage> {
                   activeDotColor: theme.colorScheme.onSecondary,
                 ),
               ),
-              PrimaryButton(
-                label: !_isLastPage ? 'NEXT' : 'DONE',
-                iconData: !_isLastPage ? Icons.arrow_forward : Icons.check,
-                onPressed: () {
-                  if (!_isLastPage) {
-                    _pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                  } else {
-                    Navigator.pop(context);
-                  }
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: PrimaryButton(
+                  label: !_isLastPage ? 'NEXT' : 'DONE',
+                  iconData: !_isLastPage ? Icons.arrow_forward : Icons.check,
+                  onPressed: () {
+                    if (!_isLastPage) {
+                      _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    } else {
+                      Navigator.pop(context);
+                    }
 
-                },
+                  },
+                ),
               ),
             ],
           ),
