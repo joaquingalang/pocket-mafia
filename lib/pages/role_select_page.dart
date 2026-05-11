@@ -34,6 +34,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
   }
 
   void _addRole(Roles newRole) {
+    if (roles.length >= widget.names.length) return;
     roles.add(newRole);
     setState(() {});
     print(roles);
