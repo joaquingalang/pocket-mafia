@@ -5,7 +5,7 @@ import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/models/role.dart';
-import 'package:pocket_mafia/pages/day_page.dart';
+import 'package:pocket_mafia/views/day_view.dart';
 import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 import 'package:sizer/sizer.dart';
