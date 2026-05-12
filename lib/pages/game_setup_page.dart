@@ -60,7 +60,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
               // Offset
               SizedBox(height: 12),
 
-              PhaseDurationSlider(
+              _PhaseDurationSlider(
                 phase: Phase.day,
                 min: _dayMin,
                 max: _dayMax,
@@ -76,7 +76,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
               // Offset
               SizedBox(height: 16),
 
-              PhaseDurationSlider(
+              _PhaseDurationSlider(
                 phase: Phase.night,
                 min: _nightMin,
                 max: _nightMax,
@@ -92,7 +92,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
               // Offset
               SizedBox(height: 16),
 
-              PhaseDurationSlider(
+              _PhaseDurationSlider(
                 phase: Phase.vote,
                 min: _voteMin,
                 max: _voteMax,
@@ -123,8 +123,8 @@ class _GameSetupPageState extends State<GameSetupPage> {
   }
 }
 
-class PhaseDurationSlider extends StatefulWidget {
-  const PhaseDurationSlider({
+class _PhaseDurationSlider extends StatefulWidget {
+  const _PhaseDurationSlider({
     super.key,
     required this.phase,
     required this.duration,
@@ -142,10 +142,10 @@ class PhaseDurationSlider extends StatefulWidget {
   final Function(double)? onChanged;
 
   @override
-  State<PhaseDurationSlider> createState() => _PhaseDurationSliderState();
+  State<_PhaseDurationSlider> createState() => _PhaseDurationSliderState();
 }
 
-class _PhaseDurationSliderState extends State<PhaseDurationSlider> {
+class _PhaseDurationSliderState extends State<_PhaseDurationSlider> {
   late final String _phaseLabel;
   late final String _icon;
 
