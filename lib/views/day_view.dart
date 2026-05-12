@@ -3,13 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/game_app_bar.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
-import 'package:pocket_mafia/models/game.dart';
+import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class DayView extends StatefulWidget {
-  const DayView({super.key, required this.game});
+  const DayView({super.key, required this.settings});
 
-  final GameSettings game;
+  final GameSettings settings;
 
   @override
   State<DayView> createState() => _DayViewState();
@@ -36,7 +36,7 @@ class _DayViewState extends State<DayView> {
               SizedBox(height: 20),
 
               PhaseTimer(
-                duration: widget.game.dayDuration!,
+                duration: widget.settings.dayDuration!,
                 onTimeout: () {
                   print('TIMEOUT!!!!');
                 },
@@ -58,10 +58,10 @@ class _DayViewState extends State<DayView> {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: widget.game.players!.length,
+                  itemCount: widget.settings.players!.length,
                   itemBuilder: (context, index) {
                     return PlayerTile(
-                      name: widget.game.players![index].name,
+                      name: widget.settings.players![index].name,
                       id: index + 1,
                     );
                   },

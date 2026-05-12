@@ -4,7 +4,7 @@ import 'package:pocket_mafia/components/game_app_bar.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_select_tile.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
-import 'package:pocket_mafia/models/game.dart';
+import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class VoteView extends StatefulWidget {

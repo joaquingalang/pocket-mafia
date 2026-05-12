@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
-import 'package:pocket_mafia/models/game.dart';
+import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/pages/add_players_page.dart';
 import 'package:pocket_mafia/theme.dart';
 

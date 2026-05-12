@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/roles.dart';
-import 'package:pocket_mafia/models/game.dart';
+import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/models/role.dart';
+import 'package:pocket_mafia/pages/game_session_page.dart';
 import 'package:pocket_mafia/views/day_view.dart';
 import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
@@ -32,7 +33,7 @@ class _RoleRevealPageState extends State<RoleRevealPage> {
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DayView(game: widget.settings)),
+          MaterialPageRoute(builder: (context) => GameSessionPage(settings: widget.settings)),
         );
       }
     });

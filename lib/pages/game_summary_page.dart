@@ -6,7 +6,7 @@ import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/enums/vote_result.dart';
-import 'package:pocket_mafia/models/game.dart';
+import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/views/day_view.dart';
 import 'package:pocket_mafia/pages/game_result_page.dart';
@@ -76,7 +76,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GameResultPage(settings: widget.settings),
+        builder: (context) => RoleRevealPage(settings: widget.settings),
       ),
     );
   }

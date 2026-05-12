@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/components/secondary_button.dart';
 import 'package:pocket_mafia/enums/roles.dart';
-import 'package:pocket_mafia/models/game.dart';
+import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 
