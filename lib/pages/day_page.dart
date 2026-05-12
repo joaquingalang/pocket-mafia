@@ -9,7 +9,7 @@ import 'package:pocket_mafia/theme.dart';
 class DayPage extends StatefulWidget {
   const DayPage({super.key, required this.game});
 
-  final Game game;
+  final GameSettings game;
 
   @override
   State<DayPage> createState() => _DayPageState();

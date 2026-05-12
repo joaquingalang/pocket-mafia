@@ -8,7 +8,7 @@ import 'package:pocket_mafia/theme.dart';
 class AddPlayersPage extends StatefulWidget {
   const AddPlayersPage({super.key, required this.game});
 
-  final Game game;
+  final GameSettings game;
 
   @override
   State<AddPlayersPage> createState() => _AddPlayersPageState();

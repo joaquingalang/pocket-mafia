@@ -13,7 +13,7 @@ import 'package:sizer/sizer.dart';
 class RoleRevealPage extends StatefulWidget {
   const RoleRevealPage({super.key, required this.game});
 
-  final Game game;
+  final GameSettings game;
 
   @override
   State<RoleRevealPage> createState() => _RoleRevealPageState();

@@ -10,7 +10,7 @@ import 'package:pocket_mafia/theme.dart';
 class VotePage extends StatefulWidget {
   const VotePage({super.key, required this.game});
 
-  final Game game;
+  final GameSettings game;
 
   @override
   State<VotePage> createState() => _VotePageState();

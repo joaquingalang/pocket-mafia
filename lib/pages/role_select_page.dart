@@ -13,7 +13,7 @@ import 'package:pocket_mafia/utils/string_helpers.dart';
 class RoleSelectPage extends StatefulWidget {
   const RoleSelectPage({super.key, required this.game, required this.names});
 
-  final Game game;
+  final GameSettings game;
   final List<String> names;
 
   @override

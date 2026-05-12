@@ -31,7 +31,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
   final int _voteDivision = 5;
 
   void _submitDurations() {
-    final Game game = Game(
+    final GameSettings game = GameSettings(
       dayDuration: Duration(seconds: _dayDuration.toInt()),
       nightDuration: Duration(seconds: _nightDuration.toInt()),
       voteDuration: Duration(seconds: _voteDuration.toInt()),

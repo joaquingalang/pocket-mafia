@@ -9,7 +9,7 @@ import 'package:pocket_mafia/utils/string_helpers.dart';
 class GameResultPage extends StatefulWidget {
   const GameResultPage({super.key, required this.game});
 
-  final Game game;
+  final GameSettings game;
 
   @override
   State<GameResultPage> createState() => _GameResultPageState();

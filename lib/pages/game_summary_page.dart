@@ -20,7 +20,7 @@ import 'package:pocket_mafia/utils/string_helpers.dart';
 class GameSummaryPage extends StatefulWidget {
   const GameSummaryPage({super.key, required this.game});
 
-  final Game game;
+  final GameSettings game;
 
   @override
   State<GameSummaryPage> createState() => _GameSummaryPageState();
