@@ -32,7 +32,7 @@ class _RoleRevealPageState extends State<RoleRevealPage> {
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DayPage(game: widget.game)),
+          MaterialPageRoute(builder: (context) => DayView(game: widget.game)),
         );
       }
     });

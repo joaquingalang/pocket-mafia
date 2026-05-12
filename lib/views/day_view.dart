@@ -6,16 +6,16 @@ import 'package:pocket_mafia/components/player_tile.dart';
 import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/theme.dart';
 
-class DayPage extends StatefulWidget {
-  const DayPage({super.key, required this.game});
+class DayView extends StatefulWidget {
+  const DayView({super.key, required this.game});
 
   final GameSettings game;
 
   @override
-  State<DayPage> createState() => _DayPageState();
+  State<DayView> createState() => _DayViewState();
 }
 
-class _DayPageState extends State<DayPage> {
+class _DayViewState extends State<DayView> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

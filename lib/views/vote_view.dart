@@ -7,16 +7,16 @@ import 'package:pocket_mafia/components/player_tile.dart';
 import 'package:pocket_mafia/models/game.dart';
 import 'package:pocket_mafia/theme.dart';
 
-class VotePage extends StatefulWidget {
-  const VotePage({super.key, required this.game});
+class VoteView extends StatefulWidget {
+  const VoteView({super.key, required this.game});
 
   final GameSettings game;
 
   @override
-  State<VotePage> createState() => _VotePageState();
+  State<VoteView> createState() => _VoteViewState();
 }
 
-class _VotePageState extends State<VotePage> {
+class _VoteViewState extends State<VoteView> {
 
   bool _isSelected = false;
 
