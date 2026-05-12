@@ -73,10 +73,6 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
   }
 
   void _startGame() {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => VotePage(game: widget.game)),
-    // );
     Navigator.push(
       context,
       MaterialPageRoute(
