@@ -11,9 +11,9 @@ import 'package:pocket_mafia/utils/string_helpers.dart';
 import 'package:sizer/sizer.dart';
 
 class RoleRevealPage extends StatefulWidget {
-  const RoleRevealPage({super.key, required this.game});
+  const RoleRevealPage({super.key, required this.settings});
 
-  final GameSettings game;
+  final GameSettings settings;
 
   @override
   State<RoleRevealPage> createState() => _RoleRevealPageState();
@@ -27,19 +27,19 @@ class _RoleRevealPageState extends State<RoleRevealPage> {
     setState(() {
       _isHidden = true;
 
-      if (_index < widget.game.players!.length - 1) {
+      if (_index < widget.settings.players!.length - 1) {
         _index++;
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DayView(game: widget.game)),
+          MaterialPageRoute(builder: (context) => DayView(game: widget.settings)),
         );
       }
     });
   }
 
   bool _isLastPlayer() {
-    return _index >= widget.game.players!.length - 1;
+    return _index >= widget.settings.players!.length - 1;
   }
 
   @override
@@ -57,11 +57,11 @@ class _RoleRevealPageState extends State<RoleRevealPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'PLAYER ${_index + 1} OF ${widget.game.players!.length}',
+                    'PLAYER ${_index + 1} OF ${widget.settings.players!.length}',
                     style: theme.textTheme.labelSmall,
                   ),
                   Text(
-                    'Pass To ${widget.game.players![_index].name}',
+                    'Pass To ${widget.settings.players![_index].name}',
                     style: theme.textTheme.headlineSmall,
                   ),
                 ],
@@ -75,7 +75,7 @@ class _RoleRevealPageState extends State<RoleRevealPage> {
                         _isHidden = false;
                       }),
                     )
-                  : _RevealedRole(role: widget.game.players![_index].role),
+                  : _RevealedRole(role: widget.settings.players![_index].role),
 
               Spacer(),
 

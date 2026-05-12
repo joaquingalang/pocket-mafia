@@ -6,9 +6,9 @@ import 'package:pocket_mafia/pages/role_select_page.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class AddPlayersPage extends StatefulWidget {
-  const AddPlayersPage({super.key, required this.game});
+  const AddPlayersPage({super.key, required this.settings});
 
-  final GameSettings game;
+  final GameSettings settings;
 
   @override
   State<AddPlayersPage> createState() => _AddPlayersPageState();
@@ -29,7 +29,7 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => RoleSelectPage(game: widget.game, names: names),
+        builder: (context) => RoleSelectPage(settings: widget.settings, names: names),
       ),
     );
   }

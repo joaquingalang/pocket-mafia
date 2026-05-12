@@ -37,7 +37,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
       voteDuration: Duration(seconds: _voteDuration.toInt()),
 
     );
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AddPlayersPage(game: game)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AddPlayersPage(settings: game)));
   }
 
   @override

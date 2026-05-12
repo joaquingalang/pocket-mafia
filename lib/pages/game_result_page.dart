@@ -7,9 +7,9 @@ import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 
 class GameResultPage extends StatefulWidget {
-  const GameResultPage({super.key, required this.game});
+  const GameResultPage({super.key, required this.settings});
 
-  final GameSettings game;
+  final GameSettings settings;
 
   @override
   State<GameResultPage> createState() => _GameResultPageState();
@@ -20,7 +20,7 @@ class _GameResultPageState extends State<GameResultPage> {
 
   List<Widget> _buildPlayerRoleTiles() {
     List<Widget> tiles = [];
-    for (Player player in widget.game.players!) {
+    for (Player player in widget.settings.players!) {
       final tile = _PlayerRoleTile(player: player);
       tiles.add(tile);
     }

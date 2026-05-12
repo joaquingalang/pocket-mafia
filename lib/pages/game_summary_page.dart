@@ -12,15 +12,15 @@ import 'package:pocket_mafia/views/day_view.dart';
 import 'package:pocket_mafia/pages/game_result_page.dart';
 import 'package:pocket_mafia/pages/game_summary_page.dart';
 import 'package:pocket_mafia/pages/role_reveal_page.dart';
-import 'package:pocket_mafia/views/vote_view.dart';
-import 'package:pocket_mafia/pages/vote_result_page.dart';
+import 'package:pocket_mafia/views/voting_view.dart';
+import 'package:pocket_mafia/views/vote_result_view.dart';
 import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 
 class GameSummaryPage extends StatefulWidget {
-  const GameSummaryPage({super.key, required this.game});
+  const GameSummaryPage({super.key, required this.settings});
 
-  final GameSettings game;
+  final GameSettings settings;
 
   @override
   State<GameSummaryPage> createState() => _GameSummaryPageState();
@@ -32,10 +32,10 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
 
   Widget _buildPlayerTiles() {
     List<Widget> playerTiles = [];
-    final int playerCount = widget.game.players!.length;
+    final int playerCount = widget.settings.players!.length;
     final int visible = (playerCount <= 5) ? playerCount : 5;
     for (int i = 0; i < visible; i++) {
-      final player = widget.game.players![i];
+      final player = widget.settings.players![i];
       playerTiles.add(PlayerTile(name: player.name, id: i + 1));
     }
     if (playerCount - visible > 0) {
@@ -47,7 +47,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
   Widget _buildRoleTiles() {
     List<Widget> roleTiles = [];
     List<Roles> roles = [];
-    for (Player player in widget.game.players!) {
+    for (Player player in widget.settings.players!) {
       final role = player.role.type;
       roles.add(role);
     }
@@ -76,7 +76,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GameResultPage(game: widget.game),
+        builder: (context) => GameResultPage(settings: widget.settings),
       ),
     );
   }
@@ -114,15 +114,15 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
                   children: [
                     _PhaseDurationTile(
                       phase: Phase.day,
-                      duration: widget.game.dayDuration!,
+                      duration: widget.settings.dayDuration!,
                     ),
                     _PhaseDurationTile(
                       phase: Phase.night,
-                      duration: widget.game.nightDuration!,
+                      duration: widget.settings.nightDuration!,
                     ),
                     _PhaseDurationTile(
                       phase: Phase.vote,
-                      duration: widget.game.voteDuration!,
+                      duration: widget.settings.voteDuration!,
                     ),
                   ],
                 ),

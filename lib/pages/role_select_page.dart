@@ -11,9 +11,9 @@ import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 
 class RoleSelectPage extends StatefulWidget {
-  const RoleSelectPage({super.key, required this.game, required this.names});
+  const RoleSelectPage({super.key, required this.settings, required this.names});
 
-  final GameSettings game;
+  final GameSettings settings;
   final List<String> names;
 
   @override
@@ -74,10 +74,10 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
       print('${player.name} : ${player.role.type}');
       players.add(player);
     }
-    final game = widget.game.copyWith(players: players);
+    final game = widget.settings.copyWith(players: players);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => GameSummaryPage(game: game)),
+      MaterialPageRoute(builder: (context) => GameSummaryPage(settings: game)),
     );
   }
 
