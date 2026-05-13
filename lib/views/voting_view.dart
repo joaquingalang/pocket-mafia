@@ -5,18 +5,20 @@ import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_select_tile.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
 import 'package:pocket_mafia/models/game_settings.dart';
+import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
-class VoteView extends StatefulWidget {
-  const VoteView({super.key, required this.settings});
+class VotingView extends StatefulWidget {
+  const VotingView({super.key, required this.voteDuration, required this.players});
 
-  final GameSettings settings;
+  final Duration voteDuration;
+  final List<Player> players;
 
   @override
-  State<VoteView> createState() => _VoteViewState();
+  State<VotingView> createState() => _VotingViewState();
 }
 
-class _VoteViewState extends State<VoteView> {
+class _VotingViewState extends State<VotingView> {
 
   bool _isSelected = false;
 
@@ -40,7 +42,7 @@ class _VoteViewState extends State<VoteView> {
               SizedBox(height: 20),
 
               PhaseTimer(
-                duration: widget.settings.dayDuration!,
+                duration: widget.voteDuration,
                 onTimeout: () {
                   print('TIMEOUT!!!!');
                 },
@@ -82,10 +84,10 @@ class _VoteViewState extends State<VoteView> {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: widget.settings.players!.length,
+                  itemCount: widget.players.length,
                   itemBuilder: (context, index) {
                     return PlayerSelectTile(
-                      name: widget.settings.players![index].name,
+                      name: widget.players[index].name,
                       id: index + 1,
                       value: _isSelected,
                       onChanged: (value) => setState(() {
