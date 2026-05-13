@@ -4,12 +4,14 @@ import 'package:pocket_mafia/components/game_app_bar.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
 import 'package:pocket_mafia/models/game_settings.dart';
+import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class DayView extends StatefulWidget {
-  const DayView({super.key, required this.settings});
+  const DayView({super.key, required this.dayDuration, required this.players});
 
-  final GameSettings settings;
+  final Duration dayDuration;
+  final List<Player> players;
 
   @override
   State<DayView> createState() => _DayViewState();
@@ -36,7 +38,7 @@ class _DayViewState extends State<DayView> {
               SizedBox(height: 20),
 
               PhaseTimer(
-                duration: widget.settings.dayDuration!,
+                duration: widget.dayDuration,
                 onTimeout: () {
                   print('TIMEOUT!!!!');
                 },
@@ -48,7 +50,7 @@ class _DayViewState extends State<DayView> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'SURVIVING PLAYERS (8)',
+                  'SURVIVING PLAYERS (${widget.players.length})',
                   style: theme.textTheme.labelSmall,
                 ),
               ),
@@ -58,10 +60,10 @@ class _DayViewState extends State<DayView> {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: widget.settings.players!.length,
+                  itemCount: widget.players.length,
                   itemBuilder: (context, index) {
                     return PlayerTile(
-                      name: widget.settings.players![index].name,
+                      name: widget.players[index].name,
                       id: index + 1,
                     );
                   },
