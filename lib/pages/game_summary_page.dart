@@ -121,7 +121,7 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
                       duration: widget.settings.nightDuration!,
                     ),
                     _PhaseDurationTile(
-                      phase: Phase.vote,
+                      phase: Phase.voting,
                       duration: widget.settings.voteDuration!,
                     ),
                   ],
@@ -275,7 +275,7 @@ class _PhaseDurationTile extends StatelessWidget {
         return 'sun';
       case Phase.night:
         return 'moon';
-      case Phase.vote:
+      case Phase.voting:
         return 'gavel';
     }
   }

@@ -1,5 +1,5 @@
 enum Phase {
   day,
   night,
-  vote
+  voting
 }

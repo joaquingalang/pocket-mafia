@@ -93,7 +93,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
               SizedBox(height: 16),
 
               _PhaseDurationSlider(
-                phase: Phase.vote,
+                phase: Phase.voting,
                 min: _voteMin,
                 max: _voteMax,
                 divisions: _voteDivision,
@@ -163,7 +163,7 @@ class _PhaseDurationSliderState extends State<_PhaseDurationSlider> {
           _icon = 'moon';
         });
         break;
-      case Phase.vote:
+      case Phase.voting:
         setState(() {
           _phaseLabel = 'Vote Duration / Player';
           _icon = 'gavel';
