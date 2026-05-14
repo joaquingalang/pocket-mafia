@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pocket_mafia/models/player.dart';
 
 class NightView extends StatefulWidget {
-  const NightView({super.key, required this.nightDuration, required this.players});
+  const NightView({super.key, required this.duration, required this.players});
 
-  final Duration nightDuration;
+  final Duration duration;
   final List<Player> players;
 
   @override

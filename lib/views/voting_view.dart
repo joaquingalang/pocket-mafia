@@ -9,9 +9,9 @@ import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class VotingView extends StatefulWidget {
-  const VotingView({super.key, required this.voteDuration, required this.players});
+  const VotingView({super.key, required this.duration, required this.players});
 
-  final Duration voteDuration;
+  final Duration duration;
   final List<Player> players;
 
   @override
@@ -42,7 +42,7 @@ class _VotingViewState extends State<VotingView> {
               SizedBox(height: 20),
 
               PhaseTimer(
-                duration: widget.voteDuration,
+                duration: widget.duration,
                 onTimeout: () {
                   print('TIMEOUT!!!!');
                 },
