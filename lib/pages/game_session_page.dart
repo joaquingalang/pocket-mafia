@@ -28,11 +28,11 @@ class _GameSessionPageState extends State<GameSessionPage> {
   Widget getPhaseView() {
     switch (phase) {
       case Phase.day:
-        return DayView(dayDuration: dayDuration!, players: players!);
+        return DayView(duration: dayDuration!, players: players!);
       case Phase.night:
-        return NightView(nightDuration: nightDuration!, players: players!);
+        return NightView(duration: nightDuration!, players: players!);
       case Phase.voting:
-        return VotingView(voteDuration: voteDuration!, players: players!);
+        return VotingView(duration: voteDuration!, players: players!);
     }
   }
 
@@ -48,7 +48,7 @@ class _GameSessionPageState extends State<GameSessionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: getPhaseView(),
+      body: VotingView(duration: dayDuration!, players: players!),
     );
   }
 }
