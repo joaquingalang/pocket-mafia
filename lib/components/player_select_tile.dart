@@ -19,7 +19,7 @@ class PlayerSelectTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(10),
       margin: EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: theme.colorScheme.secondary,
@@ -51,10 +51,19 @@ class PlayerSelectTile extends StatelessWidget {
           Spacer(),
 
           // Remove Button
-          Checkbox(
-            value: value,
-            onChanged: onChanged,
-            shape: CircleBorder(),
+          Transform.scale(
+            scale: 1.25,
+            child: Checkbox(
+              shape: CircleBorder(),
+              fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return Colors.white; // Color when box is checked
+                }
+                return Colors.transparent; // Color when box is unchecked
+              }),
+              value: value,
+              onChanged: onChanged,
+            ),
           ),
 
           // Offset
