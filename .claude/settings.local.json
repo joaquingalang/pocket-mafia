@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem *)",
+      "PowerShell(ls -Directory \"C:\\\\Users\\\\L-JOAQUIN\\\\StudioProjects\\\\pocket-mafia\" | Where-Object {$_.Name -match '^\\(android|ios|web|windows|macos|linux\\)$'} | Select-Object Name)",
+      "Bash(grep -E \"^d.*\\\\s\\(android|ios|web|windows|macos|linux\\)$\")"
+    ]
+  }
+}

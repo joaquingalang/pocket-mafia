@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_mafia/pages/add_players_page.dart';
+import 'package:pocket_mafia/pages/game_setup_page.dart';
+import 'package:pocket_mafia/pages/game_summary_page.dart';
+import 'package:pocket_mafia/pages/role_reveal_page.dart';
+import 'package:pocket_mafia/pages/role_select_page.dart';
+import 'package:pocket_mafia/pages/settings_page.dart';
+import 'package:pocket_mafia/pages/tutorial_page.dart';
+import 'package:pocket_mafia/views/voting_view.dart';
+import 'package:pocket_mafia/views/vote_result_view.dart';
 import 'package:sizer/sizer.dart';
 import 'package:pocket_mafia/pages/home_page.dart';
 import 'theme.dart';

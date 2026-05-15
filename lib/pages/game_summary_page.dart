@@ -8,6 +8,7 @@ import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/enums/vote_result.dart';
 import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/models/player.dart';
+import 'package:pocket_mafia/pages/game_session_page.dart';
 import 'package:pocket_mafia/views/day_view.dart';
 import 'package:pocket_mafia/pages/game_result_page.dart';
 import 'package:pocket_mafia/pages/game_summary_page.dart';
@@ -73,10 +74,16 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
   }
 
   void _startGame() {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => RoleRevealPage(settings: widget.settings),
+    //   ),
+    // );
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => RoleRevealPage(settings: widget.settings),
+        builder: (context) => GameSessionPage(settings: widget.settings),
       ),
     );
   }
