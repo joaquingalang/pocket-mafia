@@ -5,7 +5,6 @@ import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_select_tile.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/models/player.dart';
-import 'package:pocket_mafia/theme.dart';
 
 class NightView extends StatefulWidget {
   const NightView({super.key, required this.round, required this.duration, required this.players, required this.onPhaseChange});
@@ -33,7 +32,7 @@ class _NightViewState extends State<NightView> {
             children: [
               GameAppBar(
                 title: 'Night Action',
-                subtitle: 'DAY 1',
+                subtitle: 'NIGHT ${widget.round}',
                 onClose: () {},
                 onInfo: () {},
               ),

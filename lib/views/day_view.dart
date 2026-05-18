@@ -39,7 +39,7 @@ class _DayViewState extends State<DayView> {
             children: [
               GameAppBar(
                 title: 'Day Discussion',
-                subtitle: 'DAY 1',
+                subtitle: 'DAY ${widget.round}',
                 onClose: () {},
                 onInfo: () {},
               ),

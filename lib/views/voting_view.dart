@@ -42,7 +42,7 @@ class _VotingViewState extends State<VotingView> {
             children: [
               GameAppBar(
                 title: 'Voting Phase',
-                subtitle: 'DAY 1',
+                subtitle: 'DAY ${widget.round}',
                 onClose: () {},
                 onInfo: () {},
               ),
