@@ -115,12 +115,7 @@ class _VotingViewState extends State<VotingView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         spacing: 5,
                         children: [
-                          Text('PAUSE', style: theme.textTheme.labelLarge),
-                          Icon(
-                            Icons.pause,
-                            color: TextColors.primaryText,
-                            size: 20,
-                          ),
+                          Text('SKIP VOTE', style: theme.textTheme.labelLarge),
                         ],
                       ),
                     ),
@@ -138,13 +133,13 @@ class _VotingViewState extends State<VotingView> {
                         spacing: 5,
                         children: [
                           Text(
-                            'VOTE',
+                            'CONFIRM',
                             style: theme.textTheme.labelLarge!.copyWith(
                               color: theme.colorScheme.primary,
                             ),
                           ),
                           SvgPicture.asset(
-                            'assets/images/icons/scales_icon.svg',
+                            'assets/images/icons/check_circle_icon.svg',
                             width: 18,
                             color: theme.colorScheme.primary,
                           ),
