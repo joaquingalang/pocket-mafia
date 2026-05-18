@@ -16,24 +16,46 @@ class GameSessionPage extends StatefulWidget {
 }
 
 class _GameSessionPageState extends State<GameSessionPage> {
-
   late final Duration? dayDuration;
   late final Duration? nightDuration;
   late final Duration? voteDuration;
   late final List<Player>? players;
 
-  Phase phase = Phase.day;
+  int round = 1;
+
+  Phase phase = Phase.voting;
   bool isVoting = false;
 
   Widget getPhaseView() {
     switch (phase) {
       case Phase.day:
-        return DayView(duration: dayDuration!, players: players!);
+        return DayView(
+          round: round,
+          duration: dayDuration!,
+          players: players!,
+          onPhaseChange: updateGamePhase,
+        );
       case Phase.night:
-        return NightView(duration: nightDuration!, players: players!);
+        return NightView(
+          round: round,
+          duration: nightDuration!,
+          players: players!,
+          onPhaseChange: updateGamePhase,
+        );
       case Phase.voting:
-        return VotingView(duration: voteDuration!, players: players!);
+        return VotingView(
+          round: round,
+          duration: voteDuration!,
+          players: players!,
+          onPhaseChange: updateGamePhase,
+        );
     }
+  }
+
+  void updateGamePhase(Phase newPhase) {
+    setState(() {
+      phase = newPhase;
+    });
   }
 
   @override
@@ -48,7 +70,7 @@ class _GameSessionPageState extends State<GameSessionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: VotingView(duration: dayDuration!, players: players!),
+      body: getPhaseView(),
     );
   }
 }
