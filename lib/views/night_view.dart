@@ -3,14 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/game_app_bar.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_select_tile.dart';
+import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class NightView extends StatefulWidget {
-  const NightView({super.key, required this.duration, required this.players});
+  const NightView({super.key, required this.duration, required this.players, required this.onPhaseChange});
 
   final Duration duration;
   final List<Player> players;
+  final void Function(Phase) onPhaseChange;
 
   @override
   State<NightView> createState() => _NightViewState();

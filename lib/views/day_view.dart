@@ -3,15 +3,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/game_app_bar.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
+import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class DayView extends StatefulWidget {
-  const DayView({super.key, required this.duration, required this.players});
+  const DayView({super.key, required this.duration, required this.players, required this.onPhaseChange});
 
   final Duration duration;
   final List<Player> players;
+  final void Function(Phase) onPhaseChange;
 
   @override
   State<DayView> createState() => _DayViewState();
