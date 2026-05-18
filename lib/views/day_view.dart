@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/game_app_bar.dart';
+import 'package:pocket_mafia/components/phase_button.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
 import 'package:pocket_mafia/enums/phase.dart';
@@ -9,7 +10,13 @@ import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class DayView extends StatefulWidget {
-  const DayView({super.key, required this.round, required this.duration, required this.players, required this.onPhaseChange});
+  const DayView({
+    super.key,
+    required this.round,
+    required this.duration,
+    required this.players,
+    required this.onPhaseChange,
+  });
 
   final int round;
   final Duration duration;
@@ -79,54 +86,27 @@ class _DayViewState extends State<DayView> {
               Row(
                 spacing: 12,
                 children: [
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.secondary,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 5,
-                        children: [
-                          Text('PAUSE', style: theme.textTheme.labelLarge),
-                          Icon(
-                            Icons.pause,
-                            color: TextColors.primaryText,
-                            size: 20,
-                          ),
-                        ],
-                      ),
+                  PhaseButton(
+                    label: 'PAUSE',
+                    trailing: Icon(
+                      Icons.pause,
+                      color: TextColors.primaryText,
+                      size: 20,
                     ),
+                    isPrimary: false,
+                    onPressed: () {},
                   ),
 
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.onSecondary,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 5,
-                        children: [
-                          Text(
-                            'VOTE',
-                            style: theme.textTheme.labelLarge!.copyWith(
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                          SvgPicture.asset(
-                            'assets/images/icons/scales_icon.svg',
-                            width: 18,
-                            color: theme.colorScheme.primary,
-                          ),
-                        ],
-                      ),
+                  PhaseButton(
+                    label: 'VOTE',
+                    trailing: SvgPicture.asset(
+                      'assets/images/icons/scales_icon.svg',
+                      width: 18,
+                      color: theme.colorScheme.primary,
                     ),
+                    onPressed: () {},
                   ),
+
                 ],
               ),
 

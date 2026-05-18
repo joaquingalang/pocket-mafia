@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/game_app_bar.dart';
+import 'package:pocket_mafia/components/phase_button.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_select_tile.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
@@ -10,7 +11,13 @@ import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class VotingView extends StatefulWidget {
-  const VotingView({super.key, required this.round, required this.duration, required this.players, required this.onPhaseChange});
+  const VotingView({
+    super.key,
+    required this.round,
+    required this.duration,
+    required this.players,
+    required this.onPhaseChange,
+  });
 
   final int round;
   final Duration duration;
@@ -22,7 +29,6 @@ class VotingView extends StatefulWidget {
 }
 
 class _VotingViewState extends State<VotingView> {
-
   bool _isSelected = false;
 
   @override
@@ -59,7 +65,7 @@ class _VotingViewState extends State<VotingView> {
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.secondary,
-                  borderRadius: BorderRadius.circular(12)
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +76,7 @@ class _VotingViewState extends State<VotingView> {
                   ],
                 ),
               ),
-              
+
               // Offset
               SizedBox(height: 20),
 
@@ -107,48 +113,25 @@ class _VotingViewState extends State<VotingView> {
               Row(
                 spacing: 12,
                 children: [
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.secondary,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 5,
-                        children: [
-                          Text('SKIP VOTE', style: theme.textTheme.labelLarge),
-                        ],
-                      ),
+                  PhaseButton(
+                    label: 'SKIP VOTE',
+                    trailing: SvgPicture.asset(
+                      'assets/images/icons/peace_icon.svg',
+                      width: 18,
+                      color: theme.colorScheme.onTertiary,
                     ),
+                    isPrimary: false,
+                    onPressed: () {},
                   ),
 
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.onSecondary,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 5,
-                        children: [
-                          Text(
-                            'CONFIRM',
-                            style: theme.textTheme.labelLarge!.copyWith(
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                          SvgPicture.asset(
-                            'assets/images/icons/check_circle_icon.svg',
-                            width: 18,
-                            color: theme.colorScheme.primary,
-                          ),
-                        ],
-                      ),
+                  PhaseButton(
+                    label: 'CONFIRM',
+                    trailing: SvgPicture.asset(
+                      'assets/images/icons/check_circle_icon.svg',
+                      width: 18,
+                      color: theme.colorScheme.primary,
                     ),
+                    onPressed: () {},
                   ),
                 ],
               ),
