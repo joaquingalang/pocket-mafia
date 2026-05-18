@@ -9,8 +9,9 @@ import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class DayView extends StatefulWidget {
-  const DayView({super.key, required this.duration, required this.players, required this.onPhaseChange});
+  const DayView({super.key, required this.round, required this.duration, required this.players, required this.onPhaseChange});
 
+  final int round;
   final Duration duration;
   final List<Player> players;
   final void Function(Phase) onPhaseChange;

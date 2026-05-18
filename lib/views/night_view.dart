@@ -8,8 +8,9 @@ import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
 class NightView extends StatefulWidget {
-  const NightView({super.key, required this.duration, required this.players, required this.onPhaseChange});
+  const NightView({super.key, required this.round, required this.duration, required this.players, required this.onPhaseChange});
 
+  final int round;
   final Duration duration;
   final List<Player> players;
   final void Function(Phase) onPhaseChange;
