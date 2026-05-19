@@ -104,7 +104,7 @@ class _DayViewState extends State<DayView> {
                       width: 18,
                       color: theme.colorScheme.primary,
                     ),
-                    onPressed: () {},
+                    onPressed: () => widget.onPhaseChange(Phase.voting),
                   ),
 
                 ],

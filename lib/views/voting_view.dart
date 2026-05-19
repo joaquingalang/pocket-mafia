@@ -131,7 +131,7 @@ class _VotingViewState extends State<VotingView> {
                       width: 18,
                       color: theme.colorScheme.primary,
                     ),
-                    onPressed: () {},
+                    onPressed: () => widget.onPhaseChange(Phase.night),
                   ),
                 ],
               ),

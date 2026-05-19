@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/components/game_app_bar.dart';
+import 'package:pocket_mafia/components/phase_button.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_select_tile.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/models/player.dart';
 
 class NightView extends StatefulWidget {
-  const NightView({super.key, required this.round, required this.duration, required this.players, required this.onPhaseChange});
+  const NightView({
+    super.key,
+    required this.round,
+    required this.duration,
+    required this.players,
+    required this.onPhaseChange,
+  });
 
   final int round;
   final Duration duration;
@@ -54,15 +61,18 @@ class _NightViewState extends State<NightView> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    color: theme.colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(12)
+                  color: theme.colorScheme.secondary,
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('MAFIA', style: theme.textTheme.headlineSmall),
-                    Text('CHOOSE YOUR VICTIM', style: theme.textTheme.labelSmall),
+                    Text(
+                      'CHOOSE YOUR VICTIM',
+                      style: theme.textTheme.labelSmall,
+                    ),
                   ],
                 ),
               ),
@@ -103,31 +113,14 @@ class _NightViewState extends State<NightView> {
               Row(
                 spacing: 12,
                 children: [
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.onSecondary,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 5,
-                        children: [
-                          Text(
-                            'CONFIRM',
-                            style: theme.textTheme.labelLarge!.copyWith(
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                          SvgPicture.asset(
-                            'assets/images/icons/check_circle_icon.svg',
-                            width: 18,
-                            color: theme.colorScheme.primary,
-                          ),
-                        ],
-                      ),
+                  PhaseButton(
+                    label: 'CONFIRM',
+                    trailing: SvgPicture.asset(
+                      'assets/images/icons/check_circle_icon.svg',
+                      width: 18,
+                      color: theme.colorScheme.primary,
                     ),
+                    onPressed: () => widget.onPhaseChange(Phase.day),
                   ),
                 ],
               ),
