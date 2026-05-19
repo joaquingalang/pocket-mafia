@@ -28,6 +28,8 @@ class DayView extends StatefulWidget {
 }
 
 class _DayViewState extends State<DayView> {
+  bool _isPaused = false;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -49,6 +51,7 @@ class _DayViewState extends State<DayView> {
 
               PhaseTimer(
                 duration: widget.duration,
+                isPaused: _isPaused,
                 onTimeout: () {
                   print('TIMEOUT!!!!');
                 },
@@ -87,14 +90,14 @@ class _DayViewState extends State<DayView> {
                 spacing: 12,
                 children: [
                   PhaseButton(
-                    label: 'PAUSE',
+                    label: _isPaused ? 'RESUME' : 'PAUSE',
                     trailing: Icon(
-                      Icons.pause,
+                      _isPaused ? Icons.play_arrow : Icons.pause,
                       color: TextColors.primaryText,
                       size: 20,
                     ),
                     isPrimary: false,
-                    onPressed: () {},
+                    onPressed: () => setState(() => _isPaused = !_isPaused),
                   ),
 
                   PhaseButton(

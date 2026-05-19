@@ -8,17 +8,18 @@ class PhaseTimer extends StatefulWidget {
     super.key,
     required this.duration,
     required this.onTimeout,
+    this.isPaused = false,
   });
 
   final Duration duration;
   final VoidCallback onTimeout;
+  final bool isPaused;
 
   @override
   State<PhaseTimer> createState() => _PhaseTimerState();
 }
 
 class _PhaseTimerState extends State<PhaseTimer> {
-  Timer? _secondsTimer;
   Timer? _timer;
   int _totalSeconds = 0;
   int _seconds = 0;
@@ -26,16 +27,40 @@ class _PhaseTimerState extends State<PhaseTimer> {
   void _startTimer() {
     _totalSeconds = widget.duration.inSeconds;
     _seconds = widget.duration.inSeconds;
-    _secondsTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _resumeTimer();
+  }
+
+  void _pauseTimer() {
+    _timer?.cancel();
+    _timer = null;
+  }
+
+  void _resumeTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _seconds -= 1;
       });
+      if (_seconds <= 0) {
+        _pauseTimer();
+        widget.onTimeout();
+      }
     });
-    _timer = Timer.periodic(widget.duration + Duration(seconds: 1), (timer) {
-      widget.onTimeout();
-      _timer!.cancel();
-      _secondsTimer!.cancel();
-    });
+  }
+
+  @override
+  void didUpdateWidget(PhaseTimer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isPaused != oldWidget.isPaused) {
+      widget.isPaused ? _pauseTimer() : _resumeTimer();
+    }
+  }
+
+  String _formatDurationMMSS() {
+    final minutes = _seconds ~/ 60;
+    final seconds = _seconds % 60;
+
+    return '${minutes.toString().padLeft(2, '0')}:'
+        '${seconds.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -45,17 +70,14 @@ class _PhaseTimerState extends State<PhaseTimer> {
   }
 
   @override
-  void dispose() {
-    _secondsTimer!.cancel();
-    super.dispose();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
-  String _formatDurationMMSS() {
-    final minutes = _seconds ~/ 60;
-    final seconds = _seconds % 60;
-
-    return '${minutes.toString().padLeft(2, '0')}:'
-        '${seconds.toString().padLeft(2, '0')}';
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
