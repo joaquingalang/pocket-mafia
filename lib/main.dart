@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pocket_mafia/observer/game_bloc_observer.dart';
 import 'package:pocket_mafia/pages/add_players_page.dart';
 import 'package:pocket_mafia/pages/game_setup_page.dart';
 import 'package:pocket_mafia/pages/game_summary_page.dart';
@@ -13,6 +15,7 @@ import 'package:pocket_mafia/pages/home_page.dart';
 import 'theme.dart';
 
 void main() {
+  Bloc.observer = GameBlocObserver();
   runApp(PocketMafia());
 }
 
