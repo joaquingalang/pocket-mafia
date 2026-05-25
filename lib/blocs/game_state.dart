@@ -7,23 +7,23 @@ class GameState extends Equatable {
     this.dayDuration = const Duration(seconds: 300),
     this.nightDuration = const Duration(seconds: 60),
     this.voteDuration = const Duration(seconds: 30),
+    this.names = const [],
     this.players = const [],
     this.phase = Phase.day,
     this.round = 1,
     this.isVoting = false,
   });
 
-  // Phase & Rounds
+  // Persistent Information
   final Duration dayDuration;
   final Duration nightDuration;
   final Duration voteDuration;
+  final List<String> names;
+
+  // Game Variables
+  final List<Player> players;
   final int round;
   final bool isVoting;
-
-  // Players
-  final List<Player> players;
-
-  // Phase
   final Phase phase;
 
   GameState copyWith({
