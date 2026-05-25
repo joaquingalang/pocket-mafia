@@ -13,6 +13,9 @@ final class GameSetNightDuration extends GameEvent {}
 final class GameAddRole extends GameEvent {}
 final class GameRemoveRole extends GameEvent {}
 
+// Player + Roles
+final class GameAssignPlayerRoles extends GameEvent {}
+
 // Vote
 final class GameVillageVote extends GameEvent {}
 
@@ -27,3 +30,6 @@ final class GameMafiaWin extends GameEvent {}
 final class GameVillageWin extends GameEvent {}
 final class GameJesterWin extends GameEvent {}
 final class GameHeadhunterWin extends GameEvent {}
+
+// Reset
+final class GameReset extends GameEvent {}
