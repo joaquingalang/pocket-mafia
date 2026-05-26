@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pocket_mafia/blocs/game_bloc.dart';
+import 'package:pocket_mafia/blocs/game_event.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
@@ -31,13 +34,11 @@ class _GameSetupPageState extends State<GameSetupPage> {
   final int _voteDivision = 5;
 
   void _submitDurations() {
-    final GameSettings game = GameSettings(
-      dayDuration: Duration(seconds: _dayDuration.toInt()),
-      nightDuration: Duration(seconds: _nightDuration.toInt()),
-      voteDuration: Duration(seconds: _voteDuration.toInt()),
+    context.read<GameBloc>().add(GameSetDayDuration(duration: Duration(seconds: _dayDuration.toInt())));
+    context.read<GameBloc>().add(GameSetVoteDuration(duration: Duration(seconds: _voteDuration.toInt())));
+    context.read<GameBloc>().add(GameSetNightDuration(duration: Duration(seconds: _nightDuration.toInt())));
 
-    );
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AddPlayersPage(settings: game)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AddPlayersPage()));
   }
 
   @override
@@ -152,22 +153,16 @@ class _PhaseDurationSliderState extends State<_PhaseDurationSlider> {
   void _initPhaseMetrics() {
     switch (widget.phase) {
       case Phase.day:
-        setState(() {
-          _phaseLabel = 'Day Duration';
-          _icon = 'sun';
-        });
+        _phaseLabel = 'Day Duration';
+        _icon = 'sun';
         break;
       case Phase.night:
-        setState(() {
-          _phaseLabel = 'Night Duration / Role';
-          _icon = 'moon';
-        });
+        _phaseLabel = 'Night Duration / Role';
+        _icon = 'moon';
         break;
       case Phase.voting:
-        setState(() {
-          _phaseLabel = 'Vote Duration / Player';
-          _icon = 'gavel';
-        });
+        _phaseLabel = 'Vote Duration / Player';
+        _icon = 'gavel';
         break;
     }
   }
