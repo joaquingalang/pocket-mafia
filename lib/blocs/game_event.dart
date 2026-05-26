@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/models/role.dart';
 
-sealed class GameEvent extends Equatable{
+sealed class GameEvent extends Equatable {
   const GameEvent();
 }
 
