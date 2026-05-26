@@ -1,91 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pocket_mafia/blocs/game_bloc.dart';
+import 'package:pocket_mafia/blocs/game_event.dart';
+import 'package:pocket_mafia/blocs/game_state.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/pages/role_select_page.dart';
 import 'package:pocket_mafia/theme.dart';
 
-class AddPlayersPage extends StatefulWidget {
-  const AddPlayersPage({super.key, required this.settings});
-
-  final GameSettings settings;
-
-  @override
-  State<AddPlayersPage> createState() => _AddPlayersPageState();
-}
-
-class _AddPlayersPageState extends State<AddPlayersPage> {
+class AddPlayersPage extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
-  List<String> names = ['Anton', 'Lily', 'Joaquin', 'Angela', 'Jade', 'Jason'];
 
-  void _submitPlayers() {
-    if (names.length < 5) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Game requires at least 5 players.')),
-      );
-      return;
-    }
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => RoleSelectPage(settings: widget.settings, names: names),
-      ),
-    );
-  }
-
+  // void _submitPlayers() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsetsGeometry.symmetric(horizontal: 30),
-          child: Column(
-            children: [
-              MainAppBar(title: 'Add Players'),
+          child: BlocBuilder<GameBloc, GameState>(
+            builder: (context, state) {
+              return Column(
+                children: [
+                  MainAppBar(title: 'Add Players'),
 
-              // Offset
-              SizedBox(height: 35),
+                  // Offset
+                  SizedBox(height: 35),
 
-              // Add Player Field
-              AddPlayerTextField(
-                nameController: _nameController,
-                onAdd: (name) {
-                  setState(() {
-                    names.insert(0, name);
-                  });
-                },
-              ),
+                  // Add Player Field
+                  AddPlayerTextField(
+                    nameController: _nameController,
+                    onAdd: (name) =>
+                      context.read<GameBloc>().add(GameAddPlayer(name: name)),
+                  ),
 
-              // Offset
-              SizedBox(height: 20),
+                  // Offset
+                  SizedBox(height: 20),
 
-              // Players
-              Expanded(
-                child: ListView.builder(
-                  itemCount: names.length,
-                  itemBuilder: (context, index) {
-                    return _PlayerListTile(
-                      name: names[index],
-                      onClose: () {
-                        setState(() {
-                          names.removeAt(index);
-                        });
+                  // Players
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: state.names.length,
+                      itemBuilder: (context, index) {
+                        return _PlayerListTile(
+                          name: state.names[index],
+                          onClose: () => context.read<GameBloc>().add(GameRemovePlayer(index: index)),
+                        );
                       },
-                    );
-                  },
-                ),
-              ),
+                    ),
+                  ),
 
-              PrimaryButton(
-                label: 'PICK ROLES',
-                iconData: Icons.arrow_forward,
-                onPressed: _submitPlayers,
-              ),
+                  PrimaryButton(
+                    label: 'PICK ROLES',
+                    iconData: Icons.arrow_forward,
+                    onPressed: () {},
+                  ),
 
-              // Offset
-              SizedBox(height: 20),
-            ],
+                  // Offset
+                  SizedBox(height: 20),
+                ],
+              );
+            }
           ),
         ),
       ),
