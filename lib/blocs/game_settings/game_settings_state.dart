@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/models/player.dart';
 
-class GameState extends Equatable {
-  const GameState({
+class GameSettingsState extends Equatable {
+  const GameSettingsState({
     this.dayDuration = const Duration(seconds: 300),
     this.nightDuration = const Duration(seconds: 60),
     this.voteDuration = const Duration(seconds: 30),
@@ -26,7 +26,7 @@ class GameState extends Equatable {
   final bool isVoting;
   final Phase phase;
 
-  GameState copyWith({
+  GameSettingsState copyWith({
     Duration? dayDuration,
     Duration? nightDuration,
     Duration? voteDuration,
@@ -36,7 +36,7 @@ class GameState extends Equatable {
     int? round,
     bool? isVoting,
   }) {
-    return GameState(
+    return GameSettingsState(
       dayDuration: dayDuration ?? this.dayDuration,
       nightDuration: nightDuration ?? this.nightDuration,
       voteDuration: voteDuration ?? this.voteDuration,

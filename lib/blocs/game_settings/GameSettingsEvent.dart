@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/models/role.dart';
 
-sealed class GameEvent extends Equatable {
-  const GameEvent();
+sealed class GameSettingsEvent extends Equatable {
+  const GameSettingsEvent();
 }
 
 // Player
-final class GameAddPlayer extends GameEvent {
+final class GameAddPlayer extends GameSettingsEvent {
   const GameAddPlayer({required this.name});
   final String name;
 
@@ -14,7 +14,7 @@ final class GameAddPlayer extends GameEvent {
   List<Object?> get props => [name];
 }
 
-final class GameRemovePlayer extends GameEvent {
+final class GameRemovePlayer extends GameSettingsEvent {
   const GameRemovePlayer({required this.index});
   final int index;
 
@@ -23,7 +23,7 @@ final class GameRemovePlayer extends GameEvent {
 }
 
 // Phase Duration
-final class GameSetDayDuration extends GameEvent {
+final class GameSetDayDuration extends GameSettingsEvent {
   const GameSetDayDuration({required this.duration});
   final Duration duration;
 
@@ -31,7 +31,7 @@ final class GameSetDayDuration extends GameEvent {
   List<Object?> get props => [duration];
 }
 
-final class GameSetVoteDuration extends GameEvent {
+final class GameSetVoteDuration extends GameSettingsEvent {
   const GameSetVoteDuration({required this.duration});
   final Duration duration;
 
@@ -39,7 +39,7 @@ final class GameSetVoteDuration extends GameEvent {
   List<Object?> get props => [duration];
 }
 
-final class GameSetNightDuration extends GameEvent {
+final class GameSetNightDuration extends GameSettingsEvent {
   const GameSetNightDuration({required this.duration});
   final Duration duration;
 
@@ -48,7 +48,7 @@ final class GameSetNightDuration extends GameEvent {
 }
 
 // Roles
-final class GameAddRole extends GameEvent {
+final class GameAddRole extends GameSettingsEvent {
   const GameAddRole({required this.role});
   final Role role;
 
@@ -56,7 +56,7 @@ final class GameAddRole extends GameEvent {
   List<Object?> get props => [role];
 }
 
-final class GameRemoveRole extends GameEvent {
+final class GameRemoveRole extends GameSettingsEvent {
   const GameRemoveRole({required this.role});
   final Role role;
 
@@ -65,7 +65,7 @@ final class GameRemoveRole extends GameEvent {
 }
 
 // Player + Roles
-final class GameAssignPlayerRoles extends GameEvent {
+final class GameAssignPlayerRoles extends GameSettingsEvent {
   const GameAssignPlayerRoles();
 
   @override
@@ -73,7 +73,7 @@ final class GameAssignPlayerRoles extends GameEvent {
 }
 
 // Vote
-final class GameVillageVote extends GameEvent {
+final class GameVillageVote extends GameSettingsEvent {
   const GameVillageVote();
 
   @override
@@ -81,7 +81,7 @@ final class GameVillageVote extends GameEvent {
 }
 
 // Role Actions
-final class GameMafiaKill extends GameEvent {
+final class GameMafiaKill extends GameSettingsEvent {
   const GameMafiaKill({required this.index});
   final int index;
 
@@ -89,7 +89,7 @@ final class GameMafiaKill extends GameEvent {
   List<Object?> get props => [index];
 }
 
-final class GameDetectiveInvestigate extends GameEvent {
+final class GameDetectiveInvestigate extends GameSettingsEvent {
   const GameDetectiveInvestigate({required this.index});
   final int index;
 
@@ -97,7 +97,7 @@ final class GameDetectiveInvestigate extends GameEvent {
   List<Object?> get props => [index];
 }
 
-final class GameDoctorHeal extends GameEvent {
+final class GameDoctorHeal extends GameSettingsEvent {
   const GameDoctorHeal({required this.index});
   final int index;
 
@@ -105,7 +105,7 @@ final class GameDoctorHeal extends GameEvent {
   List<Object?> get props => [index];
 }
 
-final class GameVigilanteKill extends GameEvent {
+final class GameVigilanteKill extends GameSettingsEvent {
   const GameVigilanteKill({required this.index});
   final int index;
 
@@ -114,28 +114,28 @@ final class GameVigilanteKill extends GameEvent {
 }
 
 // Role Wins
-final class GameMafiaWin extends GameEvent {
+final class GameMafiaWin extends GameSettingsEvent {
   const GameMafiaWin();
 
   @override
   List<Object?> get props => [];
 }
 
-final class GameVillageWin extends GameEvent {
+final class GameVillageWin extends GameSettingsEvent {
   const GameVillageWin();
 
   @override
   List<Object?> get props => [];
 }
 
-final class GameJesterWin extends GameEvent {
+final class GameJesterWin extends GameSettingsEvent {
   const GameJesterWin();
 
   @override
   List<Object?> get props => [];
 }
 
-final class GameHeadhunterWin extends GameEvent {
+final class GameHeadhunterWin extends GameSettingsEvent {
   const GameHeadhunterWin();
 
   @override
@@ -143,7 +143,7 @@ final class GameHeadhunterWin extends GameEvent {
 }
 
 // Reset
-final class GameReset extends GameEvent {
+final class GameReset extends GameSettingsEvent {
   const GameReset();
 
   @override

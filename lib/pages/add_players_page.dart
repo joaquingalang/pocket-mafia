@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pocket_mafia/blocs/game_bloc.dart';
-import 'package:pocket_mafia/blocs/game_event.dart';
-import 'package:pocket_mafia/blocs/game_state.dart';
+import 'package:pocket_mafia/blocs/game_settings/game_settings_bloc.dart';
+import 'package:pocket_mafia/blocs/game_settings/GameSettingsEvent.dart';
+import 'package:pocket_mafia/blocs/game_settings/game_settings_state.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/models/game_settings.dart';
@@ -19,7 +19,7 @@ class AddPlayersPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsetsGeometry.symmetric(horizontal: 30),
-          child: BlocBuilder<GameBloc, GameState>(
+          child: BlocBuilder<GameSettingsBloc, GameSettingsState>(
             builder: (context, state) {
               return Column(
                 children: [
@@ -32,7 +32,7 @@ class AddPlayersPage extends StatelessWidget {
                   AddPlayerTextField(
                     nameController: _nameController,
                     onAdd: (name) =>
-                      context.read<GameBloc>().add(GameAddPlayer(name: name)),
+                      context.read<GameSettingsBloc>().add(GameAddPlayer(name: name)),
                   ),
 
                   // Offset
@@ -45,7 +45,7 @@ class AddPlayersPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return _PlayerListTile(
                           name: state.names[index],
-                          onClose: () => context.read<GameBloc>().add(GameRemovePlayer(index: index)),
+                          onClose: () => context.read<GameSettingsBloc>().add(GameRemovePlayer(index: index)),
                         );
                       },
                     ),
