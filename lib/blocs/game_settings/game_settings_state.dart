@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/models/player.dart';
+import 'package:pocket_mafia/models/role.dart';
 
 class GameSettingsState extends Equatable {
   const GameSettingsState({
@@ -8,10 +9,7 @@ class GameSettingsState extends Equatable {
     this.nightDuration = const Duration(seconds: 60),
     this.voteDuration = const Duration(seconds: 30),
     this.names = const [],
-    this.players = const [],
-    this.phase = Phase.day,
-    this.round = 1,
-    this.isVoting = false,
+    this.roles = const [],
   });
 
   // Persistent Information
@@ -19,32 +17,21 @@ class GameSettingsState extends Equatable {
   final Duration nightDuration;
   final Duration voteDuration;
   final List<String> names;
-
-  // Game Variables
-  final List<Player> players;
-  final int round;
-  final bool isVoting;
-  final Phase phase;
+  final List<Role> roles;
 
   GameSettingsState copyWith({
     Duration? dayDuration,
     Duration? nightDuration,
     Duration? voteDuration,
     List<String>? names,
-    List<Player>? players,
-    Phase? phase,
-    int? round,
-    bool? isVoting,
+    List<Role>? roles,
   }) {
     return GameSettingsState(
       dayDuration: dayDuration ?? this.dayDuration,
       nightDuration: nightDuration ?? this.nightDuration,
       voteDuration: voteDuration ?? this.voteDuration,
       names: names ?? this.names,
-      players: players ?? this.players,
-      phase: phase ?? this.phase,
-      round: round ?? this.round,
-      isVoting: isVoting ?? this.isVoting,
+      roles: roles ?? this.roles,
     );
   }
 
@@ -54,9 +41,6 @@ class GameSettingsState extends Equatable {
     nightDuration,
     voteDuration,
     names,
-    players,
-    phase,
-    round,
-    isVoting,
+    roles
   ];
 }
