@@ -6,56 +6,56 @@ import 'package:pocket_mafia/blocs/game_session/game_session_state.dart';
 class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
 
   GameSessionBloc() : super(const GameSessionState()) {
-    on<GameAssignRoles>(_onGameAssignRoles);
-    on<GameVillageVote>(_onGameVillageVote);
-    on<GameMafiaKill>(_onGameMafiaKill);
-    on<GameDetectiveInvestigate>(_onGameDoctorInvestigate);
-    on<GameDoctorHeal>(_onGameDoctorHeal);
-    on<GameVigilanteKill>(_onGameVigilanteKill);
-    on<GameMafiaWin>(_onGameMafiaWin);
-    on<GameVillageWin>(_onGameVillageWin);
-    on<GameJesterWin>(_onGameJesterWin);
-    on<GameHeadhunterWin>(_onGameHeadhunterWin);
+    on<GameAssignRoles>(_onAssignRoles);
+    on<GameVillageVote>(_onVillageVote);
+    on<GameMafiaKill>(_onMafiaKill);
+    on<GameDetectiveInvestigate>(_onDoctorInvestigate);
+    on<GameDoctorHeal>(_onDoctorHeal);
+    on<GameVigilanteKill>(_onVigilanteKill);
+    on<GameMafiaWin>(_onMafiaWin);
+    on<GameVillageWin>(_onVillageWin);
+    on<GameJesterWin>(_onJesterWin);
+    on<GameHeadhunterWin>(_onHeadhunterWin);
     on<GameReset>(_onGameReset);
   }
 
-  void _onGameAssignRoles(GameAssignRoles event, Emitter<GameSessionState> emit) {
+  void _onAssignRoles(GameAssignRoles event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameVillageVote(GameVillageVote event, Emitter<GameSessionState> emit) {
+  void _onVillageVote(GameVillageVote event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameMafiaKill(GameMafiaKill event, Emitter<GameSessionState> emit) {
+  void _onMafiaKill(GameMafiaKill event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameDoctorInvestigate(GameDetectiveInvestigate event, Emitter<GameSessionState> emit) {
+  void _onDoctorInvestigate(GameDetectiveInvestigate event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameDoctorHeal(GameDoctorHeal event, Emitter<GameSessionState> emit) {
+  void _onDoctorHeal(GameDoctorHeal event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameVigilanteKill(GameVigilanteKill event, Emitter<GameSessionState> emit) {
+  void _onVigilanteKill(GameVigilanteKill event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameMafiaWin(GameMafiaWin event, Emitter<GameSessionState> emit) {
+  void _onMafiaWin(GameMafiaWin event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameVillageWin(GameVillageWin event, Emitter<GameSessionState> emit) {
+  void _onVillageWin(GameVillageWin event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameJesterWin(GameJesterWin event, Emitter<GameSessionState> emit) {
+  void _onJesterWin(GameJesterWin event, Emitter<GameSessionState> emit) {
 
   }
 
-  void _onGameHeadhunterWin(GameHeadhunterWin event, Emitter<GameSessionState> emit) {
+  void _onHeadhunterWin(GameHeadhunterWin event, Emitter<GameSessionState> emit) {
 
   }
 
