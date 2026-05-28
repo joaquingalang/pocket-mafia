@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pocket_mafia/blocs/game_settings/game_settings_bloc.dart';
-import 'package:pocket_mafia/blocs/game_settings/GameSettingsEvent.dart';
+import 'package:pocket_mafia/blocs/game_settings/game_settings_event.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/phase.dart';
@@ -34,9 +34,9 @@ class _GameSetupPageState extends State<GameSetupPage> {
   final int _voteDivision = 5;
 
   void _submitDurations() {
-    context.read<GameSettingsBloc>().add(GameSetDayDuration(duration: Duration(seconds: _dayDuration.toInt())));
-    context.read<GameSettingsBloc>().add(GameSetVoteDuration(duration: Duration(seconds: _voteDuration.toInt())));
-    context.read<GameSettingsBloc>().add(GameSetNightDuration(duration: Duration(seconds: _nightDuration.toInt())));
+    context.read<GameSettingsBloc>().add(GameSettingsSetDayDuration(duration: Duration(seconds: _dayDuration.toInt())));
+    context.read<GameSettingsBloc>().add(GameSettingsSetVoteDuration(duration: Duration(seconds: _voteDuration.toInt())));
+    context.read<GameSettingsBloc>().add(GameSettingsSetNightDuration(duration: Duration(seconds: _nightDuration.toInt())));
 
     Navigator.push(context, MaterialPageRoute(builder: (context) => AddPlayersPage()));
   }

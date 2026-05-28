@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pocket_mafia/blocs/game_settings/game_settings_bloc.dart';
-import 'package:pocket_mafia/blocs/game_settings/GameSettingsEvent.dart';
+import 'package:pocket_mafia/blocs/game_settings/game_settings_event.dart';
 import 'package:pocket_mafia/blocs/game_settings/game_settings_state.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
@@ -9,8 +9,27 @@ import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/pages/role_select_page.dart';
 import 'package:pocket_mafia/theme.dart';
 
-class AddPlayersPage extends StatelessWidget {
-  final TextEditingController _nameController = TextEditingController();
+class AddPlayersPage extends StatefulWidget {
+  const AddPlayersPage({super.key});
+
+  @override
+  State<AddPlayersPage> createState() => _AddPlayersPageState();
+}
+
+class _AddPlayersPageState extends State<AddPlayersPage> {
+  late final TextEditingController _nameController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
 
   // void _submitPlayers() {
   @override
@@ -32,7 +51,7 @@ class AddPlayersPage extends StatelessWidget {
                   AddPlayerTextField(
                     nameController: _nameController,
                     onAdd: (name) =>
-                      context.read<GameSettingsBloc>().add(GameAddPlayer(name: name)),
+                      context.read<GameSettingsBloc>().add(GameSettingsAddPlayer(name: name)),
                   ),
 
                   // Offset
@@ -45,7 +64,7 @@ class AddPlayersPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return _PlayerListTile(
                           name: state.names[index],
-                          onClose: () => context.read<GameSettingsBloc>().add(GameRemovePlayer(index: index)),
+                          onClose: () => context.read<GameSettingsBloc>().add(GameSettingsRemovePlayer(index: index)),
                         );
                       },
                     ),
