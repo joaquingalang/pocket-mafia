@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/enums/phase.dart';
+import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/models/role.dart';
 
@@ -17,14 +18,14 @@ class GameSettingsState extends Equatable {
   final Duration nightDuration;
   final Duration voteDuration;
   final List<String> names;
-  final List<Role> roles;
+  final List<Roles> roles;
 
   GameSettingsState copyWith({
     Duration? dayDuration,
     Duration? nightDuration,
     Duration? voteDuration,
     List<String>? names,
-    List<Role>? roles,
+    List<Roles>? roles,
   }) {
     return GameSettingsState(
       dayDuration: dayDuration ?? this.dayDuration,
@@ -33,6 +34,16 @@ class GameSettingsState extends Equatable {
       names: names ?? this.names,
       roles: roles ?? this.roles,
     );
+  }
+
+  int roleCount(Roles search) {
+    int count = 0;
+    for (Roles role in roles) {
+      if (role == search) {
+        count += 1;
+      }
+    }
+    return count;
   }
 
   @override
