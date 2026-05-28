@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/models/role.dart';
 
 sealed class GameSettingsEvent extends Equatable {
@@ -50,7 +51,7 @@ final class GameSettingsSetNightDuration extends GameSettingsEvent {
 // Roles
 final class GameSettingsAddRole extends GameSettingsEvent {
   const GameSettingsAddRole({required this.role});
-  final Role role;
+  final Roles role;
 
   @override
   List<Object?> get props => [role];
@@ -58,7 +59,7 @@ final class GameSettingsAddRole extends GameSettingsEvent {
 
 final class GameSettingsRemoveRole extends GameSettingsEvent {
   const GameSettingsRemoveRole({required this.role});
-  final Role role;
+  final Roles role;
 
   @override
   List<Object?> get props => [role];
