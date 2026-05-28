@@ -2,6 +2,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pocket_mafia/blocs/game_session/game_session_event.dart';
 import 'package:pocket_mafia/blocs/game_session/game_session_state.dart';
+import 'package:pocket_mafia/enums/roles.dart';
+import 'package:pocket_mafia/models/player.dart';
+import 'package:pocket_mafia/models/role.dart';
 
 class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
 
@@ -20,7 +23,24 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
   }
 
   void _onAssignRoles(GameAssignRoles event, Emitter<GameSessionState> emit) {
+    List<Roles> roles = List.from(event.roles);
 
+    if (roles.length > event.names.length) {
+      roles = roles.sublist(0, event.names.length);
+    }
+
+    final deficit = event.names.length - roles.length;
+    for (int i = 0; i < deficit; i++) {
+      roles.add(Roles.villager);
+    }
+
+    roles.shuffle();
+
+    final players = List.generate(event.names.length, (i) {
+      return Player(name: event.names[i], role: Role.initFields(roles[i]));
+    });
+
+    emit(state.copyWith(players: players));
   }
 
   void _onVillageVote(GameVillageVote event, Emitter<GameSessionState> emit) {

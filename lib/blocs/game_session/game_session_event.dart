@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:pocket_mafia/enums/roles.dart';
 
 sealed class GameSessionEvent extends Equatable {
   const GameSessionEvent();
@@ -6,10 +7,13 @@ sealed class GameSessionEvent extends Equatable {
 
 // Player + Roles
 final class GameAssignRoles extends GameSessionEvent {
-  const GameAssignRoles();
+  const GameAssignRoles({required this.names, required this.roles});
+
+  final List<String> names;
+  final List<Roles> roles;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [names, roles];
 }
 
 // Vote
