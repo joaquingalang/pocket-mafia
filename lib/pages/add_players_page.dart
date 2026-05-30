@@ -31,7 +31,11 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
     super.dispose();
   }
 
-  // void _submitPlayers() {
+  void _submitPlayers() {
+    context.read<GameSettingsBloc>().add(GameSettingsInitRoles());
+    Navigator.push(context, MaterialPageRoute(builder: (context) => RoleSelectPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +77,7 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
                   PrimaryButton(
                     label: 'PICK ROLES',
                     iconData: Icons.arrow_forward,
-                    onPressed: () {},
+                    onPressed: _submitPlayers,
                   ),
 
                   // Offset
