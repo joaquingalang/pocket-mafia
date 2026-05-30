@@ -49,6 +49,13 @@ final class GameSettingsSetNightDuration extends GameSettingsEvent {
 }
 
 // Roles
+final class GameSettingsInitRoles extends GameSettingsEvent {
+  const GameSettingsInitRoles();
+
+  @override
+  List<Object?> get props => [];
+}
+
 final class GameSettingsAddRole extends GameSettingsEvent {
   const GameSettingsAddRole({required this.role});
   final Roles role;
