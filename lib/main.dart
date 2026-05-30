@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_bloc.dart';
 import 'package:pocket_mafia/blocs/game_settings/game_settings_bloc.dart';
 import 'package:pocket_mafia/observer/game_bloc_observer.dart';
 import 'package:pocket_mafia/pages/add_players_page.dart';
@@ -27,8 +28,11 @@ class PocketMafia extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, screenType) {
-        return BlocProvider(
-          create: (_) => GameSettingsBloc(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => GameSettingsBloc()),
+            BlocProvider(create: (_) => GameSessionBloc()),
+          ],
           child: MaterialApp(
             home: HomePage(),
             theme: darkTheme,
