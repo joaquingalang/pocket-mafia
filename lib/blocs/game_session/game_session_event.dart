@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/enums/roles.dart';
+import 'package:pocket_mafia/models/player.dart';
 
 sealed class GameSessionEvent extends Equatable {
   const GameSessionEvent();
@@ -43,8 +44,24 @@ final class GameAssignRoles extends GameSessionEvent {
 }
 
 // Vote
-final class GameVillageVote extends GameSessionEvent {
-  const GameVillageVote();
+final class GameBuildVoteMap extends GameSessionEvent {
+  const GameBuildVoteMap();
+
+  @override
+  List<Object?> get props => [];
+}
+
+final class GamePlayerVote extends GameSessionEvent {
+  const GamePlayerVote({required this.voter, required this.target});
+  final Player voter;
+  final Player target;
+
+  @override
+  List<Object?> get props => [voter, target];
+}
+
+final class GameTallyVotes extends GameSessionEvent {
+  const GameTallyVotes();
 
   @override
   List<Object?> get props => [];
