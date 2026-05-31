@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_bloc.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_state.dart';
 import 'package:pocket_mafia/components/main_app_bar.dart';
 import 'package:pocket_mafia/components/player_tile.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
@@ -19,9 +22,7 @@ import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 
 class GameSummaryPage extends StatefulWidget {
-  const GameSummaryPage({super.key, required this.settings});
-
-  final GameSettings settings;
+  const GameSummaryPage({super.key});
 
   @override
   State<GameSummaryPage> createState() => _GameSummaryPageState();
@@ -31,12 +32,12 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
 
   final ScrollController _scrollController = ScrollController();
 
-  Widget _buildPlayerTiles() {
+  Widget _buildPlayerTiles(GameSessionState state) {
     List<Widget> playerTiles = [];
-    final int playerCount = widget.settings.players!.length;
+    final int playerCount = state.players.length;
     final int visible = (playerCount <= 5) ? playerCount : 5;
     for (int i = 0; i < visible; i++) {
-      final player = widget.settings.players![i];
+      final player = state.players[i];
       playerTiles.add(PlayerTile(name: player.name, id: i + 1));
     }
     if (playerCount - visible > 0) {
@@ -45,10 +46,10 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
     return Column(children: playerTiles);
   }
 
-  Widget _buildRoleTiles() {
+  Widget _buildRoleTiles(GameSessionState state) {
     List<Widget> roleTiles = [];
     List<Roles> roles = [];
-    for (Player player in widget.settings.players!) {
+    for (Player player in state.players) {
       final role = player.role.type;
       roles.add(role);
     }
@@ -74,18 +75,18 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
   }
 
   void _startGame() {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => RoleRevealPage(settings: widget.settings),
-    //   ),
-    // );
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GameSessionPage(settings: widget.settings),
+        builder: (context) => RoleRevealPage(),
       ),
     );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => GameSessionPage(settings: widget.settings),
+    //   ),
+    // );
   }
 
   @override
@@ -103,69 +104,73 @@ class _GameSummaryPageState extends State<GameSummaryPage> {
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: SingleChildScrollView(
             controller: _scrollController,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MainAppBar(title: 'Game Summary'),
-
-                // Offset
-                SizedBox(height: 35),
-
-                Text('PHASE SETTINGS', style: theme.textTheme.labelSmall),
-
-                // Offset
-                SizedBox(height: 15),
-
-                Row(
-                  spacing: 10,
+            child: BlocBuilder<GameSessionBloc, GameSessionState>(
+              builder: (context, state) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _PhaseDurationTile(
-                      phase: Phase.day,
-                      duration: widget.settings.dayDuration!,
+                    MainAppBar(title: 'Game Summary'),
+
+                    // Offset
+                    SizedBox(height: 35),
+
+                    Text('PHASE SETTINGS', style: theme.textTheme.labelSmall),
+
+                    // Offset
+                    SizedBox(height: 15),
+
+                    Row(
+                      spacing: 10,
+                      children: [
+                        _PhaseDurationTile(
+                          phase: Phase.day,
+                          duration: state.dayDuration,
+                        ),
+                        _PhaseDurationTile(
+                          phase: Phase.night,
+                          duration: state.nightDuration,
+                        ),
+                        _PhaseDurationTile(
+                          phase: Phase.voting,
+                          duration: state.voteDuration,
+                        ),
+                      ],
                     ),
-                    _PhaseDurationTile(
-                      phase: Phase.night,
-                      duration: widget.settings.nightDuration!,
+
+                    // Offset
+                    SizedBox(height: 25),
+
+                    Text('PLAYERS', style: theme.textTheme.labelSmall),
+
+                    // Offset
+                    SizedBox(height: 15),
+
+                    _buildPlayerTiles(state),
+
+                    // Offset
+                    SizedBox(height: 25),
+
+                    Text('SELECTED ROLES', style: theme.textTheme.labelSmall),
+
+                    // Offset
+                    SizedBox(height: 15),
+
+                    _buildRoleTiles(state),
+
+                    // Offset
+                    SizedBox(height: 35),
+
+                    PrimaryButton(
+                      label: 'START GAME',
+                      iconData: Icons.play_arrow_outlined,
+                      onPressed: _startGame,
                     ),
-                    _PhaseDurationTile(
-                      phase: Phase.voting,
-                      duration: widget.settings.voteDuration!,
-                    ),
+
+                    // Offset
+                    SizedBox(height: 20),
                   ],
-                ),
-
-                // Offset
-                SizedBox(height: 25),
-
-                Text('PLAYERS', style: theme.textTheme.labelSmall),
-
-                // Offset
-                SizedBox(height: 15),
-
-                _buildPlayerTiles(),
-
-                // Offset
-                SizedBox(height: 25),
-
-                Text('SELECTED ROLES', style: theme.textTheme.labelSmall),
-
-                // Offset
-                SizedBox(height: 15),
-
-                _buildRoleTiles(),
-
-                // Offset
-                SizedBox(height: 35),
-
-                PrimaryButton(
-                  label: 'START GAME',
-                  iconData: Icons.play_arrow_outlined,
-                  onPressed: _startGame,
-                ),
-
-                // Offset
-                SizedBox(height: 20),
-              ],
+                );
+              }
             ),
           ),
         ),
