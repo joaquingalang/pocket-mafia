@@ -77,7 +77,7 @@ class _AddPlayersPageState extends State<AddPlayersPage> {
                   PrimaryButton(
                     label: 'PICK ROLES',
                     iconData: Icons.arrow_forward,
-                    onPressed: _submitPlayers,
+                    onPressed: () => _submitPlayers(),
                   ),
 
                   // Offset

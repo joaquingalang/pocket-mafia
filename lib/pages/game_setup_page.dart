@@ -111,7 +111,7 @@ class _GameSetupPageState extends State<GameSetupPage> {
               PrimaryButton(
                 label: 'ADD PLAYERS',
                 iconData: Icons.arrow_forward,
-                onPressed: _submitDurations,
+                onPressed: () => _submitDurations(),
               ),
 
               // Offset
