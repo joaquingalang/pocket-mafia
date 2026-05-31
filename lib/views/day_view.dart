@@ -21,7 +21,7 @@ class DayView extends StatefulWidget {
   final int round;
   final Duration duration;
   final List<Player> players;
-  final void Function(Phase) onPhaseChange;
+  final VoidCallback onPhaseChange;
 
   @override
   State<DayView> createState() => _DayViewState();
@@ -107,7 +107,7 @@ class _DayViewState extends State<DayView> {
                       width: 18,
                       color: theme.colorScheme.primary,
                     ),
-                    onPressed: () => widget.onPhaseChange(Phase.voting),
+                    onPressed: widget.onPhaseChange,
                   ),
 
                 ],
