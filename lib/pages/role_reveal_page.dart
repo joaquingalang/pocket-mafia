@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_bloc.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_state.dart';
+import 'package:pocket_mafia/blocs/game_settings/game_settings_bloc.dart';
 import 'package:pocket_mafia/components/primary_button.dart';
 import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/models/role.dart';
 import 'package:pocket_mafia/pages/game_session_page.dart';
-import 'package:pocket_mafia/views/day_view.dart';
-import 'package:pocket_mafia/theme.dart';
 import 'package:pocket_mafia/utils/string_helpers.dart';
 import 'package:sizer/sizer.dart';
 
 class RoleRevealPage extends StatefulWidget {
-  const RoleRevealPage({super.key, required this.settings});
-
-  final GameSettings settings;
+  const RoleRevealPage({super.key});
 
   @override
   State<RoleRevealPage> createState() => _RoleRevealPageState();
@@ -24,75 +24,84 @@ class _RoleRevealPageState extends State<RoleRevealPage> {
   int _index = 0;
   bool _isHidden = true;
 
-  void _nextPlayer() {
+  void _nextPlayer(List<Player> players) {
     setState(() {
       _isHidden = true;
 
-      if (_index < widget.settings.players!.length - 1) {
+      if (_index < players.length - 1) {
         _index++;
       } else {
+        final sessionState = context.read<GameSessionBloc>().state;
+        final settingsState = context.read<GameSettingsBloc>().state;
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => GameSessionPage(settings: widget.settings)),
+          MaterialPageRoute(builder: (context) => GameSessionPage()),
         );
       }
     });
   }
 
-  bool _isLastPlayer() {
-    return _index >= widget.settings.players!.length - 1;
+  bool _isLastPlayer(List<Player> players) {
+    return _index >= players.length - 1;
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Player Allocated
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+    return BlocBuilder<GameSessionBloc, GameSessionState>(
+      builder: (context, state) {
+        final players = state.players;
+        return Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    'PLAYER ${_index + 1} OF ${widget.settings.players!.length}',
-                    style: theme.textTheme.labelSmall,
+                  // Player Allocated
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'PLAYER ${_index + 1} OF ${players.length}',
+                        style: theme.textTheme.labelSmall,
+                      ),
+                      Text(
+                        'Pass To ${players[_index].name}',
+                        style: theme.textTheme.headlineSmall,
+                      ),
+                    ],
                   ),
-                  Text(
-                    'Pass To ${widget.settings.players![_index].name}',
-                    style: theme.textTheme.headlineSmall,
+
+                  Spacer(),
+
+                  (_isHidden)
+                      ? _HiddenRole(
+                          onReveal: () => setState(() {
+                            _isHidden = false;
+                          }),
+                        )
+                      : _RevealedRole(role: players[_index].role),
+
+                  Spacer(),
+
+                  PrimaryButton(
+                    label: !_isLastPlayer(players)
+                        ? 'I UNDERSTAND'
+                        : 'BEGIN DISCUSSION',
+                    iconData: Icons.arrow_forward,
+                    onPressed: !_isHidden ? () => _nextPlayer(players) : () {},
+                    isDisabled: _isHidden,
                   ),
+
+                  // Offset
+                  SizedBox(height: 20),
                 ],
               ),
-
-              Spacer(),
-
-              (_isHidden)
-                  ? _HiddenRole(
-                      onReveal: () => setState(() {
-                        _isHidden = false;
-                      }),
-                    )
-                  : _RevealedRole(role: widget.settings.players![_index].role),
-
-              Spacer(),
-
-              PrimaryButton(
-                label: !_isLastPlayer() ? 'I UNDERSTAND' : 'BEGIN DISCUSSION',
-                iconData: Icons.arrow_forward,
-                onPressed: !_isHidden ? _nextPlayer : () {},
-                isDisabled: _isHidden,
-              ),
-
-              // Offset
-              SizedBox(height: 20),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -140,7 +149,6 @@ class _HiddenRole extends StatelessWidget {
           'REVEAL',
           style: theme.textTheme.headlineLarge!.copyWith(
             color: theme.colorScheme.onSecondary,
-            // fontWeight: FontWeight.bold,
           ),
         ),
 
