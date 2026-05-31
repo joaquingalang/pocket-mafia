@@ -9,7 +9,7 @@ class GameSettingsState extends Equatable {
     this.dayDuration = const Duration(seconds: 300),
     this.nightDuration = const Duration(seconds: 60),
     this.voteDuration = const Duration(seconds: 30),
-    this.names = const [],
+    this.names = const ['Joaquin', 'Anton', 'Lily', 'Mama', 'Papa'],
     this.roles = const [],
   });
 
