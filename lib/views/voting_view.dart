@@ -22,7 +22,7 @@ class VotingView extends StatefulWidget {
   final int round;
   final Duration duration;
   final List<Player> players;
-  final void Function(Phase) onPhaseChange;
+  final VoidCallback onPhaseChange;
 
   @override
   State<VotingView> createState() => _VotingViewState();
@@ -131,7 +131,7 @@ class _VotingViewState extends State<VotingView> {
                       width: 18,
                       color: theme.colorScheme.primary,
                     ),
-                    onPressed: () => widget.onPhaseChange(Phase.night),
+                    onPressed: widget.onPhaseChange,
                   ),
                 ],
               ),
