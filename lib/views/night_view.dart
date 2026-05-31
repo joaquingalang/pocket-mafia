@@ -19,7 +19,7 @@ class NightView extends StatefulWidget {
   final int round;
   final Duration duration;
   final List<Player> players;
-  final void Function(Phase) onPhaseChange;
+  final VoidCallback onPhaseChange;
 
   @override
   State<NightView> createState() => _NightViewState();
@@ -120,7 +120,7 @@ class _NightViewState extends State<NightView> {
                       width: 18,
                       color: theme.colorScheme.primary,
                     ),
-                    onPressed: () => widget.onPhaseChange(Phase.day),
+                    onPressed: widget.onPhaseChange,
                   ),
                 ],
               ),
