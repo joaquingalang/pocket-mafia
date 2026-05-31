@@ -1,8 +1,34 @@
 import 'package:equatable/equatable.dart';
+import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/enums/roles.dart';
 
 sealed class GameSessionEvent extends Equatable {
   const GameSessionEvent();
+}
+
+// Submit Duration
+final class GameSetPhaseDurations extends GameSessionEvent {
+  const GameSetPhaseDurations({
+    required this.dayDuration,
+    required this.voteDuration,
+    required this.nightDuration,
+  });
+
+  final Duration dayDuration;
+  final Duration nightDuration;
+  final Duration voteDuration;
+
+  @override
+  List<Object?> get props => [dayDuration, voteDuration, nightDuration];
+}
+
+final class GameSetPhase extends GameSessionEvent {
+  const GameSetPhase({required this.phase});
+
+  final Phase phase;
+
+  @override
+  List<Object?> get props => [phase];
 }
 
 // Player + Roles
@@ -27,6 +53,7 @@ final class GameVillageVote extends GameSessionEvent {
 // Role Actions
 final class GameMafiaKill extends GameSessionEvent {
   const GameMafiaKill({required this.index});
+
   final int index;
 
   @override
@@ -35,6 +62,7 @@ final class GameMafiaKill extends GameSessionEvent {
 
 final class GameDetectiveInvestigate extends GameSessionEvent {
   const GameDetectiveInvestigate({required this.index});
+
   final int index;
 
   @override
@@ -43,6 +71,7 @@ final class GameDetectiveInvestigate extends GameSessionEvent {
 
 final class GameDoctorHeal extends GameSessionEvent {
   const GameDoctorHeal({required this.index});
+
   final int index;
 
   @override
@@ -51,6 +80,7 @@ final class GameDoctorHeal extends GameSessionEvent {
 
 final class GameVigilanteKill extends GameSessionEvent {
   const GameVigilanteKill({required this.index});
+
   final int index;
 
   @override
