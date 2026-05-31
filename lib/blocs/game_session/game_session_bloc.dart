@@ -10,7 +10,9 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
     on<GameSetPhaseDurations>(_onSetPhaseDurations);
     on<GameSetPhase>(_onSetPhase);
     on<GameAssignRoles>(_onAssignRoles);
-    on<GameVillageVote>(_onVillageVote);
+    on<GameBuildVoteMap>(_onBuildVoteMap);
+    on<GamePlayerVote>(_onPlayerVote);
+    on<GameTallyVotes>(_onTallyVotes);
     on<GameMafiaKill>(_onMafiaKill);
     on<GameDetectiveInvestigate>(_onDoctorInvestigate);
     on<GameDoctorHeal>(_onDoctorHeal);
@@ -60,7 +62,23 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
     emit(state.copyWith(players: players));
   }
 
-  void _onVillageVote(GameVillageVote event, Emitter<GameSessionState> emit) {}
+  void _onBuildVoteMap(
+    GameBuildVoteMap event,
+    Emitter<GameSessionState> emit,
+  ) {
+    emit(state.copyWith(
+      voteMap: { for (var player in state.players) player : 0 }
+    ));
+  }
+
+  void _onPlayerVote(GamePlayerVote event, Emitter<GameSessionState> emit) {
+    final updatedMap = Map<Player, int>.from(state.voteMap);
+    updatedMap[event.target] = (updatedMap[event.target] ?? 0) + (event.voter.role.type == Roles.celebrity ? 2 : 1);
+  }
+
+  void _onTallyVotes(GameTallyVotes event, Emitter<GameSessionState> emit) {
+
+  }
 
   void _onMafiaKill(GameMafiaKill event, Emitter<GameSessionState> emit) {}
 
