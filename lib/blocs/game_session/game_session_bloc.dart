@@ -77,7 +77,23 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
   }
 
   void _onTallyVotes(GameTallyVotes event, Emitter<GameSessionState> emit) {
+    if (state.voteMap.isEmpty) return;
 
+    final maxVotes = state.voteMap.values.reduce((a, b) => a > b ? a : b);
+    final topEntries = state.voteMap.entries.where((e) => e.value == maxVotes).toList();
+
+    if (topEntries.length > 1) {
+      emit(state.copyWith(eliminatedPlayer: null));
+      return;
+    }
+
+    final eliminated = topEntries.first.key;
+    final deceasedPlayer = eliminated.copyWith(isDeceased: true);
+    final updatedPlayers = state.players
+        .map((p) => p == eliminated ? deceasedPlayer : p)
+        .toList();
+
+    emit(state.copyWith(players: updatedPlayers, eliminatedPlayer: deceasedPlayer));
   }
 
   void _onMafiaKill(GameMafiaKill event, Emitter<GameSessionState> emit) {}
