@@ -14,7 +14,7 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
     on<GamePlayerVote>(_onPlayerVote);
     on<GameTallyVotes>(_onTallyVotes);
     on<GameMafiaKill>(_onMafiaKill);
-    on<GameDetectiveInvestigate>(_onDoctorInvestigate);
+    on<GameDetectiveInvestigate>(_onDetectiveInvestigate);
     on<GameDoctorHeal>(_onDoctorHeal);
     on<GameVigilanteKill>(_onVigilanteKill);
     on<GameMafiaWin>(_onMafiaWin);
@@ -96,19 +96,57 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
     emit(state.copyWith(players: updatedPlayers, eliminatedPlayer: deceasedPlayer));
   }
 
-  void _onMafiaKill(GameMafiaKill event, Emitter<GameSessionState> emit) {}
+  void _onMafiaKill(GameMafiaKill event, Emitter<GameSessionState> emit) {
+    final target = state.players[event.index];
+    final deceased = target.copyWith(isDeceased: true);
+    final updatedPlayers = state.players
+        .map((p) => p == target ? deceased : p)
+        .toList();
 
-  void _onDoctorInvestigate(
+    emit(state.copyWith(
+      players: updatedPlayers,
+      mafiaKillTarget: deceased,
+    ));
+  }
+
+  void _onDetectiveInvestigate(
     GameDetectiveInvestigate event,
     Emitter<GameSessionState> emit,
-  ) {}
+  ) {
+    final target = state.players[event.index];
+    emit(state.copyWith(investigationResult: target.role.team));
+  }
 
-  void _onDoctorHeal(GameDoctorHeal event, Emitter<GameSessionState> emit) {}
+  void _onDoctorHeal(GameDoctorHeal event, Emitter<GameSessionState> emit) {
+    final target = state.players[event.index];
+    if (target == state.mafiaKillTarget) {
+      final patient = target.copyWith(isDeceased: false);
+      final updatedPlayers = state.players
+          .map((p) => p == target ? patient : p)
+          .toList();
+
+      emit(state.copyWith(
+        players: updatedPlayers,
+        mafiaKillTarget: null,
+      ));
+    }
+  }
 
   void _onVigilanteKill(
     GameVigilanteKill event,
     Emitter<GameSessionState> emit,
-  ) {}
+  ) {
+    final target = state.players[event.index];
+    final deceased = target.copyWith(isDeceased: true);
+    final updatedPlayers = state.players
+        .map((p) => p == target ? deceased : p)
+        .toList();
+
+    emit(state.copyWith(
+      players: updatedPlayers,
+      vigilanteKillTarget: deceased,
+    ));
+  }
 
   void _onMafiaWin(GameMafiaWin event, Emitter<GameSessionState> emit) {}
 
@@ -119,7 +157,9 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
   void _onHeadhunterWin(
     GameHeadhunterWin event,
     Emitter<GameSessionState> emit,
-  ) {}
+  ) {
+
+  }
 
   void _onGameReset(GameReset event, Emitter<GameSessionState> emit) {}
 }
