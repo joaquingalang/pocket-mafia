@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/enums/phase.dart';
+import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/models/player.dart';
 
 class _Unset {
@@ -19,6 +20,9 @@ class GameSessionState extends Equatable {
     this.isVoting = false,
     this.voteMap = const {},
     this.eliminatedPlayer,
+    this.mafiaKillTarget,
+    this.vigilanteKillTarget,
+    this.investigationResult,
   });
 
   final List<Player> players;
@@ -30,6 +34,9 @@ class GameSessionState extends Equatable {
   final bool isVoting;
   final Map<Player, int> voteMap;
   final Player? eliminatedPlayer;
+  final Player? mafiaKillTarget;
+  final Player? vigilanteKillTarget;
+  final Teams? investigationResult;
 
   GameSessionState copyWith({
     List<Player>? players,
@@ -41,6 +48,9 @@ class GameSessionState extends Equatable {
     bool? isVoting,
     Map<Player, int>? voteMap,
     Object? eliminatedPlayer = _unset,
+    Object? mafiaKillTarget = _unset,
+    Object? vigilanteKillTarget = _unset,
+    Object? investigationResult = _unset,
   }) {
     return GameSessionState(
       players: players ?? this.players,
@@ -54,9 +64,28 @@ class GameSessionState extends Equatable {
       eliminatedPlayer: eliminatedPlayer == _unset
           ? this.eliminatedPlayer
           : eliminatedPlayer as Player?,
+      mafiaKillTarget: mafiaKillTarget == _unset
+          ? this.mafiaKillTarget
+          : mafiaKillTarget as Player?,
+      vigilanteKillTarget: vigilanteKillTarget == _unset
+          ? this.vigilanteKillTarget
+          : vigilanteKillTarget as Player?,
+      investigationResult: investigationResult == _unset
+          ? this.investigationResult
+          : investigationResult as Teams?,
     );
   }
 
   @override
-  List<Object?> get props => [players, round, isVoting, phase, voteMap, eliminatedPlayer];
+  List<Object?> get props => [
+    players,
+    round,
+    isVoting,
+    phase,
+    voteMap,
+    eliminatedPlayer,
+    mafiaKillTarget,
+    vigilanteKillTarget,
+    investigationResult,
+  ];
 }
