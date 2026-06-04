@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/enums/roles.dart';
+import 'package:pocket_mafia/enums/team_victory.dart';
 import 'package:pocket_mafia/models/player.dart';
 
 class _Unset {
@@ -23,6 +24,7 @@ class GameSessionState extends Equatable {
     this.mafiaKillTarget,
     this.vigilanteKillTarget,
     this.investigationResult,
+    this.winner,
   });
 
   final List<Player> players;
@@ -37,6 +39,7 @@ class GameSessionState extends Equatable {
   final Player? mafiaKillTarget;
   final Player? vigilanteKillTarget;
   final Teams? investigationResult;
+  final TeamVictory? winner;
 
   GameSessionState copyWith({
     List<Player>? players,
@@ -51,6 +54,7 @@ class GameSessionState extends Equatable {
     Object? mafiaKillTarget = _unset,
     Object? vigilanteKillTarget = _unset,
     Object? investigationResult = _unset,
+    Object? winner = _unset,
   }) {
     return GameSessionState(
       players: players ?? this.players,
@@ -73,6 +77,7 @@ class GameSessionState extends Equatable {
       investigationResult: investigationResult == _unset
           ? this.investigationResult
           : investigationResult as Teams?,
+      winner: winner == _unset ? this.winner : winner as TeamVictory?,
     );
   }
 
@@ -87,5 +92,6 @@ class GameSessionState extends Equatable {
     mafiaKillTarget,
     vigilanteKillTarget,
     investigationResult,
+    winner,
   ];
 }

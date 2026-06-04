@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pocket_mafia/blocs/game_session/game_session_event.dart';
 import 'package:pocket_mafia/blocs/game_session/game_session_state.dart';
 import 'package:pocket_mafia/enums/roles.dart';
+import 'package:pocket_mafia/enums/team_victory.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/models/role.dart';
 
@@ -148,17 +149,23 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
     ));
   }
 
-  void _onMafiaWin(GameMafiaWin event, Emitter<GameSessionState> emit) {}
+  void _onMafiaWin(GameMafiaWin event, Emitter<GameSessionState> emit) {
+    emit(state.copyWith(winner: TeamVictory.mafia));
+  }
 
-  void _onVillageWin(GameVillageWin event, Emitter<GameSessionState> emit) {}
+  void _onVillageWin(GameVillageWin event, Emitter<GameSessionState> emit) {
+    emit(state.copyWith(winner: TeamVictory.village));
+  }
 
-  void _onJesterWin(GameJesterWin event, Emitter<GameSessionState> emit) {}
+  void _onJesterWin(GameJesterWin event, Emitter<GameSessionState> emit) {
+    emit(state.copyWith(winner: TeamVictory.jester));
+  }
 
   void _onHeadhunterWin(
     GameHeadhunterWin event,
     Emitter<GameSessionState> emit,
   ) {
-
+    emit(state.copyWith(winner: TeamVictory.headhunter));
   }
 
   void _onGameReset(GameReset event, Emitter<GameSessionState> emit) {}
