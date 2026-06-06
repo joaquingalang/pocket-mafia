@@ -33,6 +33,7 @@ class _DayViewState extends State<DayView> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final alivePlayers = widget.players.where((p) => !p.isDeceased).toList();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -63,7 +64,7 @@ class _DayViewState extends State<DayView> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'SURVIVING PLAYERS (${widget.players.length})',
+                  'SURVIVING PLAYERS (${alivePlayers.length})',
                   style: theme.textTheme.labelSmall,
                 ),
               ),
@@ -73,11 +74,11 @@ class _DayViewState extends State<DayView> {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: widget.players.length,
+                  itemCount: alivePlayers.length,
                   itemBuilder: (context, index) {
                     return PlayerTile(
-                      name: widget.players[index].name,
-                      id: index + 1,
+                      name: alivePlayers[index].name,
+                      id: widget.players.indexOf(alivePlayers[index]) + 1,
                     );
                   },
                 ),

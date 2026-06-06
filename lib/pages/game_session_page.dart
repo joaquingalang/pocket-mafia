@@ -26,7 +26,11 @@ class _GameSessionPageState extends State<GameSessionPage> {
           round: state.round,
           duration: state.dayDuration,
           players: state.players,
-          onPhaseChange: () => context.read<GameSessionBloc>().add(GameSetPhase(phase: Phase.voting)),
+          onPhaseChange: () {
+            final bloc = context.read<GameSessionBloc>();
+            bloc.add(const GameBuildVoteMap());
+            bloc.add(const GameSetPhase(phase: Phase.voting));
+          },
         );
       case Phase.night:
         return NightView(

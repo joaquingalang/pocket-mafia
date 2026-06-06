@@ -68,13 +68,14 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
     Emitter<GameSessionState> emit,
   ) {
     emit(state.copyWith(
-      voteMap: { for (var player in state.players) player : 0 }
+      voteMap: { for (var player in state.players.where((p) => !p.isDeceased)) player : 0 }
     ));
   }
 
   void _onPlayerVote(GamePlayerVote event, Emitter<GameSessionState> emit) {
     final updatedMap = Map<Player, int>.from(state.voteMap);
     updatedMap[event.target] = (updatedMap[event.target] ?? 0) + (event.voter.role.type == Roles.celebrity ? 2 : 1);
+    emit(state.copyWith(voteMap: updatedMap));
   }
 
   void _onTallyVotes(GameTallyVotes event, Emitter<GameSessionState> emit) {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_bloc.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_event.dart';
 import 'package:pocket_mafia/components/game_app_bar.dart';
 import 'package:pocket_mafia/components/phase_button.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_select_tile.dart';
-import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/models/player.dart';
 
 class NightView extends StatefulWidget {
@@ -26,11 +28,16 @@ class NightView extends StatefulWidget {
 }
 
 class _NightViewState extends State<NightView> {
-  bool _isSelected = false;
+  Player? _selectedPlayer;
+
+  List<Player> get _alivePlayers =>
+      widget.players.where((p) => !p.isDeceased).toList();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final alive = _alivePlayers;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -93,14 +100,15 @@ class _NightViewState extends State<NightView> {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: widget.players.length,
+                  itemCount: alive.length,
                   itemBuilder: (context, index) {
+                    final player = alive[index];
                     return PlayerSelectTile(
-                      name: widget.players[index].name,
-                      id: index + 1,
-                      value: _isSelected,
-                      onChanged: (value) => setState(() {
-                        _isSelected = value;
+                      name: player.name,
+                      id: widget.players.indexOf(player) + 1,
+                      value: player == _selectedPlayer,
+                      onChanged: (checked) => setState(() {
+                        _selectedPlayer = (checked == true) ? player : null;
                       }),
                     );
                   },
@@ -120,7 +128,15 @@ class _NightViewState extends State<NightView> {
                       width: 18,
                       color: theme.colorScheme.primary,
                     ),
-                    onPressed: widget.onPhaseChange,
+                    onPressed: () {
+                      if (_selectedPlayer == null) return;
+                      context.read<GameSessionBloc>().add(
+                        GameMafiaKill(
+                          index: widget.players.indexOf(_selectedPlayer!),
+                        ),
+                      );
+                      widget.onPhaseChange();
+                    },
                   ),
                 ],
               ),

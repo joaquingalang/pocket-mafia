@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_bloc.dart';
+import 'package:pocket_mafia/blocs/game_session/game_session_event.dart';
 import 'package:pocket_mafia/components/game_app_bar.dart';
 import 'package:pocket_mafia/components/phase_button.dart';
 import 'package:pocket_mafia/components/phase_timer.dart';
 import 'package:pocket_mafia/components/player_select_tile.dart';
-import 'package:pocket_mafia/components/player_tile.dart';
-import 'package:pocket_mafia/enums/phase.dart';
-import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/theme.dart';
 
@@ -29,11 +29,40 @@ class VotingView extends StatefulWidget {
 }
 
 class _VotingViewState extends State<VotingView> {
-  bool _isSelected = false;
+  int _voterIndex = 0;
+  Player? _selectedTarget;
+
+  List<Player> get _alivePlayers =>
+      widget.players.where((p) => !p.isDeceased).toList();
+
+  void _advance({bool skip = false}) {
+    final alive = _alivePlayers;
+    final currentVoter = alive[_voterIndex];
+
+    if (!skip && _selectedTarget != null) {
+      context.read<GameSessionBloc>().add(
+        GamePlayerVote(voter: currentVoter, target: _selectedTarget!),
+      );
+    }
+
+    if (_voterIndex + 1 >= alive.length) {
+      context.read<GameSessionBloc>().add(const GameTallyVotes());
+      widget.onPhaseChange();
+    } else {
+      setState(() {
+        _voterIndex++;
+        _selectedTarget = null;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final alive = _alivePlayers;
+    final currentVoter = alive[_voterIndex];
+    final targets = alive.where((p) => p != currentVoter).toList();
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -72,7 +101,7 @@ class _VotingViewState extends State<VotingView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('CURRENT VOTER', style: theme.textTheme.labelSmall),
-                    Text('Alex Carter', style: theme.textTheme.headlineSmall),
+                    Text(currentVoter.name, style: theme.textTheme.headlineSmall),
                   ],
                 ),
               ),
@@ -93,14 +122,15 @@ class _VotingViewState extends State<VotingView> {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: widget.players.length,
+                  itemCount: targets.length,
                   itemBuilder: (context, index) {
+                    final player = targets[index];
                     return PlayerSelectTile(
-                      name: widget.players[index].name,
-                      id: index + 1,
-                      value: _isSelected,
-                      onChanged: (value) => setState(() {
-                        _isSelected = value;
+                      name: player.name,
+                      id: widget.players.indexOf(player) + 1,
+                      value: player == _selectedTarget,
+                      onChanged: (checked) => setState(() {
+                        _selectedTarget = (checked == true) ? player : null;
                       }),
                     );
                   },
@@ -121,7 +151,7 @@ class _VotingViewState extends State<VotingView> {
                       color: theme.colorScheme.onTertiary,
                     ),
                     isPrimary: false,
-                    onPressed: () {},
+                    onPressed: () => _advance(skip: true),
                   ),
 
                   PhaseButton(
@@ -131,7 +161,9 @@ class _VotingViewState extends State<VotingView> {
                       width: 18,
                       color: theme.colorScheme.primary,
                     ),
-                    onPressed: widget.onPhaseChange,
+                    onPressed: () {
+                      if (_selectedTarget != null) _advance();
+                    },
                   ),
                 ],
               ),
