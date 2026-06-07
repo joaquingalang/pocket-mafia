@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/enums/team_victory.dart';
+import 'package:pocket_mafia/enums/vote_result.dart';
 import 'package:pocket_mafia/models/player.dart';
 
 class _Unset {
@@ -21,6 +22,7 @@ class GameSessionState extends Equatable {
     this.isVoting = false,
     this.voteMap = const {},
     this.eliminatedPlayer,
+    this.voteResult,
     this.mafiaKillTarget,
     this.vigilanteKillTarget,
     this.investigationResult,
@@ -36,6 +38,7 @@ class GameSessionState extends Equatable {
   final bool isVoting;
   final Map<Player, int> voteMap;
   final Player? eliminatedPlayer;
+  final VoteResult? voteResult;
   final Player? mafiaKillTarget;
   final Player? vigilanteKillTarget;
   final Teams? investigationResult;
@@ -51,6 +54,7 @@ class GameSessionState extends Equatable {
     bool? isVoting,
     Map<Player, int>? voteMap,
     Object? eliminatedPlayer = _unset,
+    Object? voteResult = _unset,
     Object? mafiaKillTarget = _unset,
     Object? vigilanteKillTarget = _unset,
     Object? investigationResult = _unset,
@@ -68,6 +72,9 @@ class GameSessionState extends Equatable {
       eliminatedPlayer: eliminatedPlayer == _unset
           ? this.eliminatedPlayer
           : eliminatedPlayer as Player?,
+      voteResult: voteResult == _unset
+          ? this.voteResult
+          : voteResult as VoteResult?,
       mafiaKillTarget: mafiaKillTarget == _unset
           ? this.mafiaKillTarget
           : mafiaKillTarget as Player?,
@@ -89,6 +96,7 @@ class GameSessionState extends Equatable {
     phase,
     voteMap,
     eliminatedPlayer,
+    voteResult,
     mafiaKillTarget,
     vigilanteKillTarget,
     investigationResult,

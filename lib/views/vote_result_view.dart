@@ -9,10 +9,16 @@ import 'package:pocket_mafia/models/player.dart';
 import 'package:sizer/sizer.dart';
 
 class VoteResultPage extends StatefulWidget {
-  const VoteResultPage({super.key, required this.result, this.player});
+  const VoteResultPage({
+    super.key,
+    required this.result,
+    required this.onProceed,
+    this.player,
+  });
 
   final VoteResult result;
   final Player? player;
+  final VoidCallback onProceed;
 
   @override
   State<VoteResultPage> createState() => _VoteResultPageState();
@@ -111,9 +117,7 @@ class _VoteResultPageState extends State<VoteResultPage> {
 
               Spacer(),
 
-              _BeginNightTimerIndicator(onComplete: () {
-                print('TIMER DONE!');
-              }),
+              _BeginNightTimerIndicator(onComplete: widget.onProceed),
 
               // Offset
               SizedBox(height: 15),
@@ -121,7 +125,7 @@ class _VoteResultPageState extends State<VoteResultPage> {
               PrimaryButton(
                 label: 'PROCEED TO NIGHT',
                 iconData: Icons.nightlight_outlined,
-                onPressed: () {},
+                onPressed: widget.onProceed,
               ),
 
               // Offset

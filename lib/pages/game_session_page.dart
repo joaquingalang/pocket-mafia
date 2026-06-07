@@ -4,10 +4,12 @@ import 'package:pocket_mafia/blocs/game_session/game_session_bloc.dart';
 import 'package:pocket_mafia/blocs/game_session/game_session_event.dart';
 import 'package:pocket_mafia/blocs/game_session/game_session_state.dart';
 import 'package:pocket_mafia/enums/phase.dart';
+import 'package:pocket_mafia/enums/vote_result.dart';
 import 'package:pocket_mafia/models/game_settings.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/views/day_view.dart';
 import 'package:pocket_mafia/views/night_view.dart';
+import 'package:pocket_mafia/views/vote_result_view.dart';
 import 'package:pocket_mafia/views/voting_view.dart';
 
 class GameSessionPage extends StatefulWidget {
@@ -44,7 +46,15 @@ class _GameSessionPageState extends State<GameSessionPage> {
           round: state.round,
           duration: state.voteDuration,
           players: state.players,
-          onPhaseChange: () => context.read<GameSessionBloc>().add(GameSetPhase(phase: Phase.night)),
+          onPhaseChange: () {},
+        );
+      case Phase.voteResult:
+        return VoteResultPage(
+          result: state.voteResult ?? VoteResult.spared,
+          player: state.eliminatedPlayer,
+          onProceed: () => context.read<GameSessionBloc>().add(
+            const GameSetPhase(phase: Phase.night),
+          ),
         );
     }
   }

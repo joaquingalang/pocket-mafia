@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pocket_mafia/blocs/game_session/game_session_event.dart';
 import 'package:pocket_mafia/blocs/game_session/game_session_state.dart';
+import 'package:pocket_mafia/enums/phase.dart';
 import 'package:pocket_mafia/enums/roles.dart';
 import 'package:pocket_mafia/enums/team_victory.dart';
+import 'package:pocket_mafia/enums/vote_result.dart';
 import 'package:pocket_mafia/models/player.dart';
 import 'package:pocket_mafia/models/role.dart';
 
@@ -79,13 +81,25 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
   }
 
   void _onTallyVotes(GameTallyVotes event, Emitter<GameSessionState> emit) {
-    if (state.voteMap.isEmpty) return;
+    if (state.voteMap.isEmpty) {
+      emit(state.copyWith(
+        voteResult: VoteResult.spared,
+        eliminatedPlayer: null,
+        phase: Phase.voteResult,
+      ));
+      return;
+    }
 
     final maxVotes = state.voteMap.values.reduce((a, b) => a > b ? a : b);
     final topEntries = state.voteMap.entries.where((e) => e.value == maxVotes).toList();
 
-    if (topEntries.length > 1) {
-      emit(state.copyWith(eliminatedPlayer: null));
+    if (maxVotes == 0 || topEntries.length > 1) {
+      final result = maxVotes == 0 ? VoteResult.spared : VoteResult.divided;
+      emit(state.copyWith(
+        voteResult: result,
+        eliminatedPlayer: null,
+        phase: Phase.voteResult,
+      ));
       return;
     }
 
@@ -95,7 +109,12 @@ class GameSessionBloc extends Bloc<GameSessionEvent, GameSessionState> {
         .map((p) => p == eliminated ? deceasedPlayer : p)
         .toList();
 
-    emit(state.copyWith(players: updatedPlayers, eliminatedPlayer: deceasedPlayer));
+    emit(state.copyWith(
+      players: updatedPlayers,
+      eliminatedPlayer: deceasedPlayer,
+      voteResult: VoteResult.executed,
+      phase: Phase.voteResult,
+    ));
   }
 
   void _onMafiaKill(GameMafiaKill event, Emitter<GameSessionState> emit) {
