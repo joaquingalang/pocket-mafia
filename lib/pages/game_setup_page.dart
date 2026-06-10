@@ -164,6 +164,10 @@ class _PhaseDurationSliderState extends State<_PhaseDurationSlider> {
         _phaseLabel = 'Vote Duration / Player';
         _icon = 'gavel';
         break;
+      case Phase.voteResult:
+        _phaseLabel = 'Vote Result';
+        _icon = 'gavel';
+        break;
     }
   }
 
