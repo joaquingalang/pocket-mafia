@@ -21,11 +21,19 @@ class GameSessionState extends Equatable {
     this.round = 1,
     this.isVoting = false,
     this.voteMap = const {},
+    this.snitchSuspects = const [],
+    this.vigilanteHasKilled = false,
+    this.mediumHasRevived = false,
+    this.preacherVoteBonus = 1,
     this.eliminatedPlayer,
     this.voteResult,
     this.mafiaKillTarget,
+    this.pendingMafiaKill,
+    this.doctorProtectTarget,
     this.vigilanteKillTarget,
     this.investigationResult,
+    this.headhunterTarget,
+    this.preacherGuessTarget,
     this.winner,
   });
 
@@ -37,11 +45,19 @@ class GameSessionState extends Equatable {
   final int round;
   final bool isVoting;
   final Map<Player, int> voteMap;
+  final List<Player> snitchSuspects;
+  final bool vigilanteHasKilled;
+  final bool mediumHasRevived;
+  final int preacherVoteBonus;
   final Player? eliminatedPlayer;
   final VoteResult? voteResult;
   final Player? mafiaKillTarget;
+  final Player? pendingMafiaKill;
+  final Player? doctorProtectTarget;
   final Player? vigilanteKillTarget;
   final Teams? investigationResult;
+  final Player? headhunterTarget;
+  final Player? preacherGuessTarget;
   final TeamVictory? winner;
 
   GameSessionState copyWith({
@@ -53,11 +69,19 @@ class GameSessionState extends Equatable {
     int? round,
     bool? isVoting,
     Map<Player, int>? voteMap,
+    List<Player>? snitchSuspects,
+    bool? vigilanteHasKilled,
+    bool? mediumHasRevived,
+    int? preacherVoteBonus,
     Object? eliminatedPlayer = _unset,
     Object? voteResult = _unset,
     Object? mafiaKillTarget = _unset,
+    Object? pendingMafiaKill = _unset,
+    Object? doctorProtectTarget = _unset,
     Object? vigilanteKillTarget = _unset,
     Object? investigationResult = _unset,
+    Object? headhunterTarget = _unset,
+    Object? preacherGuessTarget = _unset,
     Object? winner = _unset,
   }) {
     return GameSessionState(
@@ -69,21 +93,19 @@ class GameSessionState extends Equatable {
       round: round ?? this.round,
       isVoting: isVoting ?? this.isVoting,
       voteMap: voteMap ?? this.voteMap,
-      eliminatedPlayer: eliminatedPlayer == _unset
-          ? this.eliminatedPlayer
-          : eliminatedPlayer as Player?,
-      voteResult: voteResult == _unset
-          ? this.voteResult
-          : voteResult as VoteResult?,
-      mafiaKillTarget: mafiaKillTarget == _unset
-          ? this.mafiaKillTarget
-          : mafiaKillTarget as Player?,
-      vigilanteKillTarget: vigilanteKillTarget == _unset
-          ? this.vigilanteKillTarget
-          : vigilanteKillTarget as Player?,
-      investigationResult: investigationResult == _unset
-          ? this.investigationResult
-          : investigationResult as Teams?,
+      snitchSuspects: snitchSuspects ?? this.snitchSuspects,
+      vigilanteHasKilled: vigilanteHasKilled ?? this.vigilanteHasKilled,
+      mediumHasRevived: mediumHasRevived ?? this.mediumHasRevived,
+      preacherVoteBonus: preacherVoteBonus ?? this.preacherVoteBonus,
+      eliminatedPlayer: eliminatedPlayer == _unset ? this.eliminatedPlayer : eliminatedPlayer as Player?,
+      voteResult: voteResult == _unset ? this.voteResult : voteResult as VoteResult?,
+      mafiaKillTarget: mafiaKillTarget == _unset ? this.mafiaKillTarget : mafiaKillTarget as Player?,
+      pendingMafiaKill: pendingMafiaKill == _unset ? this.pendingMafiaKill : pendingMafiaKill as Player?,
+      doctorProtectTarget: doctorProtectTarget == _unset ? this.doctorProtectTarget : doctorProtectTarget as Player?,
+      vigilanteKillTarget: vigilanteKillTarget == _unset ? this.vigilanteKillTarget : vigilanteKillTarget as Player?,
+      investigationResult: investigationResult == _unset ? this.investigationResult : investigationResult as Teams?,
+      headhunterTarget: headhunterTarget == _unset ? this.headhunterTarget : headhunterTarget as Player?,
+      preacherGuessTarget: preacherGuessTarget == _unset ? this.preacherGuessTarget : preacherGuessTarget as Player?,
       winner: winner == _unset ? this.winner : winner as TeamVictory?,
     );
   }
@@ -95,11 +117,19 @@ class GameSessionState extends Equatable {
     isVoting,
     phase,
     voteMap,
+    snitchSuspects,
+    vigilanteHasKilled,
+    mediumHasRevived,
+    preacherVoteBonus,
     eliminatedPlayer,
     voteResult,
     mafiaKillTarget,
+    pendingMafiaKill,
+    doctorProtectTarget,
     vigilanteKillTarget,
     investigationResult,
+    headhunterTarget,
+    preacherGuessTarget,
     winner,
   ];
 }
