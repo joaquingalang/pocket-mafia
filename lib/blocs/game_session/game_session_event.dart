@@ -133,6 +133,32 @@ final class GameHeadhunterWin extends GameSessionEvent {
   List<Object?> get props => [];
 }
 
+// Night resolution
+final class GameResolveNight extends GameSessionEvent {
+  const GameResolveNight();
+
+  @override
+  List<Object?> get props => [];
+}
+
+final class GameMediumRevive extends GameSessionEvent {
+  const GameMediumRevive({required this.index});
+
+  final int index;
+
+  @override
+  List<Object?> get props => [index];
+}
+
+final class GamePreacherGuess extends GameSessionEvent {
+  const GamePreacherGuess({required this.index});
+
+  final int index;
+
+  @override
+  List<Object?> get props => [index];
+}
+
 // Reset
 final class GameReset extends GameSessionEvent {
   const GameReset();
