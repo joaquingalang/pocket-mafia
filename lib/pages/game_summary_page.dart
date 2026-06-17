@@ -291,6 +291,8 @@ class _PhaseDurationTile extends StatelessWidget {
         return 'gavel';
       case Phase.voteResult:
         return 'gavel';
+      case Phase.nightResult:
+        return 'moon';
     }
   }
 
